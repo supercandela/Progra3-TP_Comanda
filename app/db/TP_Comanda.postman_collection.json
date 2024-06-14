@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "4db6ae02-75b2-4147-aa6c-412c085303b8",
+		"name": "TP_Comanda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27248795"
+	},
+	"item": [
+		{
+			"name": "01-Get_Base",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666"
+			},
+			"response": []
+		},
+		{
+			"name": "02-Usuarios-CargarUno",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre_usuario",
+							"value": "alejandro_usuario"
+						},
+						{
+							"key": "clave",
+							"value": "123456"
+						},
+						{
+							"key": "id_tipo",
+							"value": "1"
+						},
+						{
+							"key": "nombre",
+							"value": "Alejandro"
+						},
+						{
+							"key": "apellido",
+							"value": "Bongioanni"
+						},
+						{
+							"key": "fecha_alta",
+							"value": "2024/06/12"
+						},
+						{
+							"key": "fecha_baja",
+							"value": null
+						},
+						{
+							"key": "id_estado",
+							"value": "4"
+						}
+					]
+				},
+				"url": "http://localhost:666/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "03-Usuarios-TraerTodos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "04-Usuarios-TraerUno_PorNombreDeUsuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/usuarios/candela_usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "05-Usuarios-ModificarUno",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre_usuario",
+							"value": "alejandro_usuario"
+						},
+						{
+							"key": "clave",
+							"value": "123456",
+							"disabled": true
+						},
+						{
+							"key": "id_tipo",
+							"value": "1"
+						},
+						{
+							"key": "nombre",
+							"value": "Alejandro"
+						},
+						{
+							"key": "apellido",
+							"value": "Bongioanni"
+						},
+						{
+							"key": "fecha_alta",
+							"value": "2024/06/12"
+						},
+						{
+							"key": "fecha_baja",
+							"value": null
+						},
+						{
+							"key": "id_estado",
+							"value": "4"
+						}
+					]
+				},
+				"url": "http://localhost:666/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "06-Usuarios-BorrarUno",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "idUsuario",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "07-Productos-CargarUno",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_sector",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Ipa con miel - Pinta",
+							"type": "text"
+						},
+						{
+							"key": "descripcion",
+							"value": "India Pale Ale, endulzada con miel. Alta graduación alcohólica.",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "3500",
+							"type": "text"
+						},
+						{
+							"key": "tiempo_preparacion",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/productos"
+			},
+			"response": []
+		},
+		{
+			"name": "08-Productos-TraerTodos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productos"
+			},
+			"response": []
+		},
+		{
+			"name": "09-Productos-TraerUno_PorNombreDeProducto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productos/cosmopolitan"
+			},
+			"response": []
+		},
+		{
+			"name": "10-Productos-ModificarUno",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_sector",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Cosmopolitan",
+							"type": "text"
+						},
+						{
+							"key": "descripcion",
+							"value": "Cóctel de martini rojo con cierto matiz a fruta ácida. Vodka, triple sec, jugo de arándanos rojos y jugo de lima. Servido en copa de cóctel, adornado con piel de lima.",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "5500",
+							"type": "text"
+						},
+						{
+							"key": "tiempo_preparacion",
+							"value": "15",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/productos"
+			},
+			"response": []
+		},
+		{
+			"name": "11-Productos-BorrarUno",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "idProducto",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/productos"
+			},
+			"response": []
+		},
+		{
+			"name": "12-Mesas-CargarUno",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "10005",
+							"type": "text"
+						},
+						{
+							"key": "id_estado",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/mesas"
+			},
+			"response": []
+		},
+		{
+			"name": "13-Mesas-TraerTodos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/mesas"
+			},
+			"response": []
+		},
+		{
+			"name": "14-Mesas-TraerUno_PorIdMesa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/mesas/10001"
+			},
+			"response": []
+		},
+		{
+			"name": "15-Mesas-ModificarUno",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "10001",
+							"type": "text"
+						},
+						{
+							"key": "id_estado",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/mesas"
+			},
+			"response": []
+		},
+		{
+			"name": "16-Mesas-BorrarUno",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "idMesa",
+							"value": "10005",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/mesas"
+			},
+			"response": []
+		}
+	]
+}
