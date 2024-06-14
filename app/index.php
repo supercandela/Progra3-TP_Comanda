@@ -16,6 +16,7 @@ require_once './db/AccesoDatos.php';
 // require_once './middlewares/Logger.php';
 
 require_once './controllers/UsuarioController.php';
+require_once './controllers/ProductoController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -24,24 +25,34 @@ $dotenv->safeLoad();
 // Instantiate App
 $app = AppFactory::create();
 
-// Add error middleware
-$app->addErrorMiddleware(true, true, true);
+// // Add error middleware
+// $app->addErrorMiddleware(true, true, true);
 
 // Add parse body
 $app->addBodyParsingMiddleware();
 
 // Routes
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-    $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
-    $group->post('[/]', \UsuarioController::class . ':CargarUno');
-  });
+  $group->get('[/]', \UsuarioController::class . ':TraerTodos');
+  $group->get('/{nombreUsuario}', \UsuarioController::class . ':TraerUno');
+  $group->post('[/]', \UsuarioController::class . ':CargarUno');
+  $group->put('[/]', \UsuarioController::class . ':ModificarUno');
+  $group->delete('[/]', \UsuarioController::class . ':BorrarUno');
+});
 
-$app->get('[/]', function (Request $request, Response $response) {    
-    $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
-    
-    $response->getBody()->write($payload);
-    return $response->withHeader('Content-Type', 'application/json');
+$app->group('/productos', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \ProductoController::class . ':TraerTodos');
+  $group->get('/{nombreProducto}', \ProductoController::class . ':TraerUno');
+  $group->post('[/]', \ProductoController::class . ':CargarUno');
+  $group->put('[/]', \ProductoController::class . ':ModificarUno');
+  $group->delete('[/]', \ProductoController::class . ':BorrarUno');
+});
+
+$app->get('[/]', function (Request $request, Response $response) {
+  $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
+
+  $response->getBody()->write($payload);
+  return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->run();
