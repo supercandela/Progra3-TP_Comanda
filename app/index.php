@@ -13,11 +13,12 @@ use Slim\Routing\RouteContext;
 require __DIR__ . '/../vendor/autoload.php';
 
 require_once './db/AccesoDatos.php';
-// require_once './middlewares/Logger.php';
+require_once './middlewares/Logger.php';
 
 require_once './controllers/UsuarioController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/MesaController.php';
+require_once './controllers/PedidoController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -26,8 +27,8 @@ $dotenv->safeLoad();
 // Instantiate App
 $app = AppFactory::create();
 
-// // Add error middleware
-// $app->addErrorMiddleware(true, true, true);
+// Add error middleware
+$app->addErrorMiddleware(true, true, true);
 
 // Add parse body
 $app->addBodyParsingMiddleware();
@@ -55,6 +56,14 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
   $group->post('[/]', \MesaController::class . ':CargarUno');
   $group->put('[/]', \MesaController::class . ':ModificarUno');
   $group->delete('[/]', \MesaController::class . ':BorrarUno');
+});
+
+$app->group('/pedidos', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \PedidoController::class . ':TraerTodos');
+  // $group->get('/{idMesa}', \PedidoController::class . ':TraerUno');
+  $group->post('[/]', \PedidoController::class . ':CargarUno');
+  // $group->put('[/]', \PedidoController::class . ':ModificarUno');
+  // $group->delete('[/]', \PedidoController::class . ':BorrarUno');
 });
 
 $app->get('[/]', function (Request $request, Response $response) {
