@@ -41,32 +41,46 @@ class PedidoController extends Pedido implements IApiUsable
 
     public function TraerUno($request, $response, $args)
     {
-        // // Buscamos mesa por id
-        // $idMesa = $args['idMesa'];
-        // $mesa = Mesa::obtenerMesa($idMesa);
-        // $payload = json_encode($mesa);
+        $idPedido = $args['idPedido'];
+        $pedido = Pedido::obtenerPedido($idPedido);
+        $payload = json_encode($pedido);
 
-        // $response->getBody()->write($payload);
-        // return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     public function ModificarUno($request, $response, $args)
     {
-        // $parametros = $request->getParsedBody();
-        // // Tomo los parámetros de la variable
-        // $id = $parametros['id'];
-        // $id_estado = $parametros['id_estado'];
+        $parametros = $request->getParsedBody();
+        // Tomo los parámetros de la variable
+        $id = $parametros['id'];
+        $id_mesa = $parametros['id_mesa'];
+        $cliente_nombre = $parametros['cliente_nombre'];
+        $id_estado_pedido = $parametros['id_estado_pedido'];
+        if ($id_estado_pedido == 3) {
+            $hora_entrega = new DateTime();
+            $hora_entrega = $hora_entrega->format('Y-m-d H:i:s');
+        }
+        $id_mozo = $parametros['id_mozo'];
+        $productos_en_pedido = $parametros['productos_en_pedido'];
 
-        // $mesa = new Mesa();
-        // $mesa->id = $id;
-        // $mesa->id_estado = $id_estado;
+        $pedido = new Pedido();
+        $pedido->id = $id;
+        $pedido->id_mesa = $id_mesa;
+        $pedido->cliente_nombre = $cliente_nombre;
+        $pedido->id_estado_pedido = $id_estado_pedido;
+        if ($id_estado_pedido == 3) {
+            $pedido->hora_entrega = $hora_entrega;
+        }
+        $pedido->id_mozo = $id_mozo;
+        $pedido->productos_en_pedido = $productos_en_pedido;
 
-        // $mesa->modificarMesa();
+        $pedido->modificarPedido();
 
-        // $payload = json_encode(array("mensaje" => "Mesa modificada con exito"));
+        $payload = json_encode(array("mensaje" => "Pedido modificado con exito"));
 
-        // $response->getBody()->write($payload);
-        // return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     public function BorrarUno($request, $response, $args)

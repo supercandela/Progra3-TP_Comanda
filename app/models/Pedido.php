@@ -86,16 +86,43 @@ class Pedido
         return $data;
     }
     
-    // public static function obtenerPedido($nombreProducto)
-    // {
-    //     $objAccesoDatos = AccesoDatos::obtenerInstancia();
-    //     $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM productos WHERE nombre = :nombreProducto");
-    //     $consulta->bindValue(':nombreProducto', $nombreProducto, PDO::PARAM_STR);
-    //     $consulta->execute();
+    public static function obtenerPedido($idPedido)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM pedidos WHERE id = :idPedido");
+        $consulta->bindValue(':idPedido', $idPedido, PDO::PARAM_STR);
+        $consulta->execute();
     
-    //     return $consulta->fetchObject('Producto');
-    // }
+        $data =  $consulta->fetchObject('Pedido');
 
+        //TRAER TODOS LOS QUE COINCIDAN CON EL ID DEL PEDIDO
+        $prod = Producto_en_Pedido::obtenerProductosPorIdDePedido($data->id);
+        //AGREGARLOS A PRODUCTOS EN PEDIDO EN EL OBJETO
+        if (!is_bool($prod)) {
+            $data->productos_en_pedido = $prod;
+        }
+        return $data;
+    }
+    
+    public function modificarPedido()
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE pedidos SET id_mesa = :id_mesa, cliente_nombre = :cliente_nombre, id_estado_pedido = :id_estado_pedido, hora_entrega = :hora_entrega, id_mozo = :id_mozo WHERE id = :id");
+        
+        $consulta->bindValue(':id_mesa', $this->id_mesa, PDO::PARAM_INT);
+        $consulta->bindValue(':cliente_nombre', $this->cliente_nombre, PDO::PARAM_STR);
+        $consulta->bindValue(':id_estado_pedido', $this->id_estado_pedido, PDO::PARAM_INT);
+        $consulta->bindValue(':hora_entrega', $this->hora_entrega, PDO::PARAM_STR);
+        $consulta->bindValue(':id_mozo', $this->id_mozo, PDO::PARAM_INT);
+        $consulta->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $consulta->execute();
+
+        //Actualizo cada producto del pedido
+        foreach ($this->productos_en_pedido as $item) {
+            //Lo guardo en su tabla
+            Producto_en_Pedido::modificarProductoEnPedido($this->id, $item["id_producto"], $item["cantidad"], $item["id_usuario_preparacion"], $item["id_estado_pedido"]);
+        }
+    }
 
 
     /*
@@ -103,20 +130,6 @@ class Pedido
 
     
     
-    public function modificarProducto()
-    {
-        $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE productos SET id_sector = :id_sector, nombre = :nombre, descripcion = :descripcion, precio = :precio, tiempo_preparacion = :tiempo_preparacion WHERE id = :id");
-        
-        $consulta->bindValue(':id_sector', $this->id_sector, PDO::PARAM_INT);
-        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':descripcion', $this->descripcion, PDO::PARAM_STR);
-        $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
-        $consulta->bindValue(':tiempo_preparacion', $this->tiempo_preparacion, PDO::PARAM_INT);
-        $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
-
-        $consulta->execute();
-    }
 
     public static function borrarProducto($id)
     {

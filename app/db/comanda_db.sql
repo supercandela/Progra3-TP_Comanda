@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2024 at 11:00 PM
+-- Generation Time: Jun 22, 2024 at 11:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `comanda_db`
 --
-CREATE DATABASE IF NOT EXISTS `comanda_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `comanda_db`;
 
 -- --------------------------------------------------------
 
@@ -78,10 +76,45 @@ CREATE TABLE `pedidos` (
   `cliente_nombre` varchar(20) NOT NULL,
   `id_estado_pedido` int(11) NOT NULL,
   `inicio_preparacion` date NOT NULL,
-  `hora_entrega` date NOT NULL,
+  `hora_entrega` date DEFAULT NULL,
   `id_mozo` int(11) NOT NULL,
-  `precio_final` float NOT NULL
+  `precio_final` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `inicio_preparacion`, `hora_entrega`, `id_mozo`, `precio_final`) VALUES
+('1YCGP', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('6oWya', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('6x3P9', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('7aYNX', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('8pXKh', 10004, 'Moira', 2, '2024-06-22', NULL, 5, NULL),
+('c1nhQ', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
+('cZA76', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
+('db74f', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('DHz2o', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('FkZ7F', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
+('gn3dr', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('Hi69h', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
+('hZwuH', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('IIQfk', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('kHWM5', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('Kjdr6', 10002, 'Nicolás', 1, '2024-06-21', NULL, 5, NULL),
+('lO2VW', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('LUL08', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('N3zzK', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('ov9gU', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('pIZZH', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('QtcK5', 10003, 'Candela', 1, '2024-06-22', NULL, 5, NULL),
+('RAtOZ', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('S2N9I', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('SCnG9', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('tKIpb', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('Tx3Rg', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('vkm1Y', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('YQKEI', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -138,9 +171,22 @@ CREATE TABLE `productos_en_pedido` (
   `id_pedido` varchar(5) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `id_usuario_preparacion` int(11) NOT NULL,
-  `id_estado_pedido` int(11) NOT NULL
+  `id_usuario_preparacion` int(11) DEFAULT NULL,
+  `id_estado_pedido` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productos_en_pedido`
+--
+
+INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`, `id_usuario_preparacion`, `id_estado_pedido`) VALUES
+(1, 'SCnG9', 3, 4, NULL, NULL),
+(2, 'Kjdr6', 2, 1, NULL, NULL),
+(3, 'Kjdr6', 1, 1, NULL, NULL),
+(4, 'QtcK5', 1, 2, NULL, NULL),
+(5, 'QtcK5', 2, 2, NULL, NULL),
+(6, '8pXKh', 1, 2, NULL, NULL),
+(7, '8pXKh', 2, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -172,7 +218,7 @@ INSERT INTO `sectores` (`id`, `descripcion`) VALUES
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre_usuario` varchar(20) NOT NULL,
-  `clave` varchar(20) NOT NULL,
+  `clave` varchar(250) NOT NULL,
   `id_tipo` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
@@ -187,7 +233,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `clave`, `id_tipo`, `nombre`, `apellido`, `fecha_alta`, `fecha_baja`, `id_estado`) VALUES
 (1, 'candela_usuario', '$2y$10$lGwlbGbJFuD/e', 1, 'Candela', 'Bogado', '2024-06-11', '0000-00-00', 4),
-(2, 'alejandro_usuario', '$2y$10$YjYqyHzNGP358', 1, 'Alejandro', 'Bongioanni', '2024-06-12', '0000-00-00', 4);
+(2, 'alejandro_usuario', '$2y$10$YjYqyHzNGP358', 1, 'Alejandro', 'Bongioanni', '2024-06-12', '0000-00-00', 4),
+(4, 'francisco_mozo', '$2y$10$Xrko0vKiWysPS/CMhXNwKe7McHOwOHKWVFiT8/onUPxoxKTqCpe7.', 5, 'Francisco', 'Gómez', '2024-06-20', '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -230,7 +277,8 @@ INSERT INTO `usuarios_tipo` (`id`, `rol`) VALUES
 (2, 'bartender'),
 (3, 'cervecero'),
 (4, 'cocinero'),
-(5, 'mozo');
+(5, 'mozo'),
+(6, 'pastelero');
 
 --
 -- Indexes for dumped tables
@@ -322,7 +370,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `productos_en_pedido`
 --
 ALTER TABLE `productos_en_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sectores`
@@ -334,7 +382,7 @@ ALTER TABLE `sectores`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `usuarios_estado`
@@ -346,7 +394,7 @@ ALTER TABLE `usuarios_estado`
 -- AUTO_INCREMENT for table `usuarios_tipo`
 --
 ALTER TABLE `usuarios_tipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

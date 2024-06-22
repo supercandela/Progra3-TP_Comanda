@@ -60,9 +60,9 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidoController::class . ':TraerTodos');
-  // $group->get('/{idMesa}', \PedidoController::class . ':TraerUno');
+  $group->get('/{idPedido}', \PedidoController::class . ':TraerUno');
   $group->post('[/]', \PedidoController::class . ':CargarUno');
-  // $group->put('[/]', \PedidoController::class . ':ModificarUno');
+  $group->put('[/]', \PedidoController::class . ':ModificarUno');
   // $group->delete('[/]', \PedidoController::class . ':BorrarUno');
 });
 
