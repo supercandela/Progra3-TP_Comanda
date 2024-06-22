@@ -349,6 +349,81 @@
 				"url": "http://localhost:666/mesas"
 			},
 			"response": []
+		},
+		{
+			"name": "17-Pedidos-CargarUno",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_mesa",
+							"value": "10002",
+							"type": "text"
+						},
+						{
+							"key": "nombre_cliente",
+							"value": "Nicolás",
+							"type": "text"
+						},
+						{
+							"key": "id_estado_pedido",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "id_mozo",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "productos_en_pedido",
+							"value": "[{\"id_producto\": \"2\", \"cantidad\": \"1\"}, {\"id_producto\": \"1\", \"cantidad\": \"1\"}]",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/pedidos"
+			},
+			"response": []
+		},
+		{
+			"name": "18-Pedidos-TraerTodos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/pedidos"
+			},
+			"response": []
+		},
+		{
+			"name": "19-Pedidos-TraerUno_PorIdPedido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/pedidos/8pXKh"
+			},
+			"response": []
+		},
+		{
+			"name": "20-Pedidos-ModificarUno",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"8pXKh\",\r\n    \"id_mesa\": 10004,\r\n    \"cliente_nombre\": \"Moira\",\r\n    \"id_estado_pedido\": 2,\r\n    \"inicio_preparacion\": \"2024-06-22\",\r\n    \"hora_entrega\": null,\r\n    \"id_mozo\": 5,\r\n    \"precio_final\": null,\r\n    \"productos_en_pedido\": [\r\n        {\r\n            \"id_producto\": 1,\r\n            \"cantidad\": 3,\r\n            \"id_usuario_preparacion\": 3,\r\n            \"id_estado_pedido\": 1\r\n        },\r\n        {\r\n            \"id_producto\": 4,\r\n            \"cantidad\": 1,\r\n            \"id_usuario_preparacion\": 4,\r\n            \"id_estado_pedido\": 1\r\n        },\r\n                {\r\n            \"id_producto\": 35,\r\n            \"cantidad\": 3,\r\n            \"id_usuario_preparacion\": 3,\r\n            \"id_estado_pedido\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:666/pedidos"
+			},
+			"response": []
 		}
 	]
 }
