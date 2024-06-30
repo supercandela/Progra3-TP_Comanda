@@ -3,7 +3,7 @@
 class Mesa
 {
     public $id;
-    public $id_estado;
+    public $estado;
     
     public function crearMesa()
     {
@@ -11,7 +11,7 @@ class Mesa
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (id, id_estado) VALUES (:id, :id_estado)");
         
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $consulta->bindValue(':id_estado', $this->id_estado, PDO::PARAM_INT);
+        $consulta->bindValue(':id_estado', $this->estado, PDO::PARAM_INT);
         $consulta->execute();
     
         return $objAccesoDatos->obtenerUltimoId();
@@ -20,7 +20,7 @@ class Mesa
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM mesas");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT m.id, e.estado FROM mesas AS m INNER JOIN mesas_estado as e ON m.id_estado = e.id");
         $consulta->execute();
     
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Mesa');
@@ -29,7 +29,7 @@ class Mesa
     public static function obtenerMesa($idMesa)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM mesas WHERE id = :idMesa");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT m.id, e.estado FROM mesas AS m INNER JOIN mesas_estado as e ON m.id_estado = e.id WHERE m.id = :idMesa");
         $consulta->bindValue(':idMesa', $idMesa, PDO::PARAM_INT);
         $consulta->execute();
     
@@ -42,7 +42,7 @@ class Mesa
         $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas SET id_estado = :id_estado WHERE id = :id");
         
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $consulta->bindValue(':id_estado', $this->id_estado, PDO::PARAM_INT);
+        $consulta->bindValue(':id_estado', $this->estado, PDO::PARAM_INT);
 
         $consulta->execute();
     }

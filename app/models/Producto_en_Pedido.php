@@ -2,10 +2,10 @@
 
 class Producto_en_Pedido
 {
-    public $id_producto;
+    public $producto;
     public $cantidad;
-    public $id_usuario_preparacion;
-    public $id_estado_pedido;
+    public $usuario_preparacion;
+    public $estado_pedido;
 
     public static function crearProductoEnPedido($id_pedido, $id_producto, $cantidad)
     {
@@ -23,7 +23,7 @@ class Producto_en_Pedido
     public static function obtenerProductosPorIdDePedido($idPedido)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id_producto, cantidad, id_usuario_preparacion, id_estado_pedido FROM productos_en_pedido WHERE id_pedido = :id_pedido");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT prod.nombre as producto, pp.cantidad as cantidad, u.nombre as usuario_preparacion, e.estado as estado_pedido FROM productos_en_pedido as pp INNER JOIN productos as prod on pp.id_producto = prod.id INNER JOIN usuarios as u ON pp.id_usuario_preparacion = u.id INNER JOIN pedidos_estado as e ON pp.id_estado_pedido = e.id WHERE pp.id_pedido = :id_pedido;");
         
         $consulta->bindValue(':id_pedido', $idPedido, PDO::PARAM_STR);
         $consulta->execute();
@@ -34,15 +34,6 @@ class Producto_en_Pedido
     public static function modificarProductoEnPedido($id_pedido, $id_producto, $cantidad, $id_usuario_preparacion, $id_estado_pedido)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-
-        // $consulta = $objAccesoDatos->prepararConsulta(
-        //     "IF EXISTS " .
-        //     "(SELECT 1 FROM productos_en_pedido WHERE id_pedido = :id_pedido AND id_producto = :id_producto) " .
-        //     "THEN " .
-        //     "UPDATE productos_en_pedido SET cantidad = :cantidad, id_usuario_preparacion = :id_usuario_preparacion, id_estado_pedido = :id_estado_pedido WHERE id_pedido = :id_pedido AND id_producto = :id_producto; " .
-        //     "ELSE " .
-        //     "INSERT INTO productos_en_pedido (id_pedido, id_producto, cantidad, id_usuario_preparacion, id_estado_pedido) VALUES (:id_pedido, :id_producto, :cantidad, :id_usuario_preparacion, :id_estado_pedido); " .
-        //     "END IF;");
 
         $consulta = $objAccesoDatos->prepararConsulta("SELECT COUNT(*) AS cnt FROM productos_en_pedido WHERE id_pedido = :id_pedido AND id_producto = :id_producto;");
 
@@ -66,6 +57,15 @@ class Producto_en_Pedido
         $consulta->bindValue(':cantidad', $cantidad, PDO::PARAM_INT);
         $consulta->bindValue(':id_usuario_preparacion', $id_usuario_preparacion, PDO::PARAM_INT);
         $consulta->bindValue(':id_estado_pedido', $id_estado_pedido, PDO::PARAM_INT);
+        $consulta->execute();
+    }
+
+    public static function borrarProductosEnPedido($id_pedido)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("DELETE FROM productos_en_pedido WHERE id_pedido = :id_pedido");
+        
+        $consulta->bindValue(':id_pedido', $id_pedido, PDO::PARAM_STR);
         $consulta->execute();
     }
 }

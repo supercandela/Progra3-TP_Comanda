@@ -19,9 +19,9 @@ class PedidoController extends Pedido implements IApiUsable
         $pedido = new Pedido();
         $pedido->id_mesa = $id_mesa;
         $pedido->cliente_nombre = $nombre_cliente;
-        $pedido->id_estado_pedido = $id_estado_pedido;
+        $pedido->estado_pedido = $id_estado_pedido;
         $pedido->inicio_preparacion = $hora_inicio_prep;
-        $pedido->id_mozo = $id_mozo;
+        $pedido->mozo = $id_mozo;
         $pedido->productos_en_pedido = $productos_en_pedido;
         $pedido->crearPedido();
 
@@ -68,11 +68,11 @@ class PedidoController extends Pedido implements IApiUsable
         $pedido->id = $id;
         $pedido->id_mesa = $id_mesa;
         $pedido->cliente_nombre = $cliente_nombre;
-        $pedido->id_estado_pedido = $id_estado_pedido;
+        $pedido->estado_pedido = $id_estado_pedido;
         if ($id_estado_pedido == 3) {
             $pedido->hora_entrega = $hora_entrega;
         }
-        $pedido->id_mozo = $id_mozo;
+        $pedido->mozo = $id_mozo;
         $pedido->productos_en_pedido = $productos_en_pedido;
 
         $pedido->modificarPedido();
@@ -85,11 +85,11 @@ class PedidoController extends Pedido implements IApiUsable
 
     public function BorrarUno($request, $response, $args)
     {
-        // $parametros = $request->getParsedBody();
-        // $mesaId = $parametros['idMesa'];
-        // Mesa::borrarMesa($mesaId);
-        // $payload = json_encode(array("mensaje" => "Mesa borrada con exito"));
-        // $response->getBody()->write($payload);
-        // return $response->withHeader('Content-Type', 'application/json');
+        $parametros = $request->getParsedBody();
+        $pedidoId = $parametros['idPedido'];
+        Pedido::borrarPedido($pedidoId);
+        $payload = json_encode(array("mensaje" => "Pedido borrado con exito"));
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 }

@@ -10,7 +10,7 @@ class UsuarioController extends Usuario implements IApiUsable
 
         $nombre_usuario = $parametros['nombre_usuario'];
         $clave = $parametros['clave'];
-        $tipo = $parametros['id_tipo'];
+        $rol = $parametros['id_tipo'];
         $nombre = $parametros['nombre'];
         $apellido = $parametros['apellido'];
         $fecha_alta = $parametros['fecha_alta'];
@@ -21,12 +21,12 @@ class UsuarioController extends Usuario implements IApiUsable
         $usr = new Usuario();
         $usr->nombre_usuario = $nombre_usuario;
         $usr->clave = $clave;
-        $usr->id_tipo = $tipo;
+        $usr->rol = $rol;
         $usr->nombre = $nombre;
         $usr->apellido = $apellido;
         $usr->fecha_alta = $fecha_alta;
         $usr->fecha_baja = $fecha_baja;
-        $usr->id_estado = $estado;
+        $usr->estado = $estado;
         $usr->crearUsuario();
 
         $payload = json_encode(array("mensaje" => "Usuario creado con exito"));
@@ -69,12 +69,12 @@ class UsuarioController extends Usuario implements IApiUsable
         // Creo el usuario
         $usr = new Usuario();
         $usr->nombre_usuario = $nombre_usuario;
-        $usr->id_tipo = $tipo;
+        $usr->rol = $tipo;
         $usr->nombre = $nombre;
         $usr->apellido = $apellido;
         $usr->fecha_alta = $fecha_alta;
         $usr->fecha_baja = $fecha_baja;
-        $usr->id_estado = $estado;
+        $usr->estado = $estado;
 
         $usr->modificarUsuario();
 

@@ -63,14 +63,8 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('/{idPedido}', \PedidoController::class . ':TraerUno');
   $group->post('[/]', \PedidoController::class . ':CargarUno');
   $group->put('[/]', \PedidoController::class . ':ModificarUno');
-  // $group->delete('[/]', \PedidoController::class . ':BorrarUno');
+  $group->delete('[/]', \PedidoController::class . ':BorrarUno');
 });
 
-$app->get('[/]', function (Request $request, Response $response) {
-  $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
-
-  $response->getBody()->write($payload);
-  return $response->withHeader('Content-Type', 'application/json');
-});
 
 $app->run();

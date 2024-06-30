@@ -7,10 +7,10 @@ class Pedido
     public $id;
     public $id_mesa;
     public $cliente_nombre;
-    public $id_estado_pedido;
+    public $estado_pedido;
     public $inicio_preparacion;
     public $hora_entrega;
-    public $id_mozo;
+    public $mozo;
     public $precio_final;
     public $productos_en_pedido;
 
@@ -43,9 +43,9 @@ class Pedido
         $consulta->bindValue(':id', $idAleatorio, PDO::PARAM_STR);
         $consulta->bindValue(':id_mesa', $this->id_mesa, PDO::PARAM_INT);
         $consulta->bindValue(':cliente_nombre', $this->cliente_nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':id_estado_pedido', $this->id_estado_pedido, PDO::PARAM_INT);
+        $consulta->bindValue(':id_estado_pedido', $this->estado_pedido, PDO::PARAM_INT);
         $consulta->bindValue(':inicio_preparacion', $this->inicio_preparacion, PDO::PARAM_STR);
-        $consulta->bindValue(':id_mozo', $this->id_mozo, PDO::PARAM_INT);
+        $consulta->bindValue(':id_mozo', $this->mozo, PDO::PARAM_INT);
         $consulta->execute();
 
         //Guardo cada producto del pedido
@@ -67,7 +67,7 @@ class Pedido
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM pedidos");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT p.id, p.id_mesa, p.cliente_nombre, e.estado as estado_pedido, p.inicio_preparacion, p.hora_entrega, u.nombre as mozo, p.precio_final FROM pedidos as p INNER JOIN pedidos_estado as e ON p.id_estado_pedido = e.id INNER JOIN usuarios as u ON p.id_mozo = u.id");
         $consulta->execute();
     
         $data = $consulta->fetchAll(PDO::FETCH_CLASS, 'Pedido');
@@ -89,7 +89,7 @@ class Pedido
     public static function obtenerPedido($idPedido)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM pedidos WHERE id = :idPedido");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT p.id, p.id_mesa, p.cliente_nombre, e.estado as estado_pedido, p.inicio_preparacion, p.hora_entrega, u.nombre as mozo, p.precio_final FROM pedidos as p INNER JOIN pedidos_estado as e ON p.id_estado_pedido = e.id INNER JOIN usuarios as u ON p.id_mozo = u.id WHERE p.id = :idPedido");
         $consulta->bindValue(':idPedido', $idPedido, PDO::PARAM_STR);
         $consulta->execute();
     
@@ -111,9 +111,9 @@ class Pedido
         
         $consulta->bindValue(':id_mesa', $this->id_mesa, PDO::PARAM_INT);
         $consulta->bindValue(':cliente_nombre', $this->cliente_nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':id_estado_pedido', $this->id_estado_pedido, PDO::PARAM_INT);
+        $consulta->bindValue(':id_estado_pedido', $this->estado_pedido, PDO::PARAM_INT);
         $consulta->bindValue(':hora_entrega', $this->hora_entrega, PDO::PARAM_STR);
-        $consulta->bindValue(':id_mozo', $this->id_mozo, PDO::PARAM_INT);
+        $consulta->bindValue(':id_mozo', $this->mozo, PDO::PARAM_INT);
         $consulta->bindValue(':id', $this->id, PDO::PARAM_STR);
         $consulta->execute();
 
@@ -124,20 +124,12 @@ class Pedido
         }
     }
 
-
-    /*
-    
-
-    
-    
-
-    public static function borrarProducto($id)
+    public static function borrarPedido($id)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta(" DELETE FROM productos WHERE id = :id");
-        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        $consulta = $objAccesoDato->prepararConsulta(" DELETE FROM pedidos WHERE id = :id");
+        $consulta->bindValue(':id', $id, PDO::PARAM_STR);
         $consulta->execute();
+        Producto_en_Pedido::borrarProductosEnPedido($id);
     }
-
-    */
 }

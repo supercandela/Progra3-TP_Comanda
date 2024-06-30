@@ -16,7 +16,7 @@ class ProductoController extends Producto implements IApiUsable
 
         // Creamos el producto
         $prod = new Producto();
-        $prod->id_sector = $id_sector;
+        $prod->sector = $id_sector;
         $prod->nombre = $nombre;
         $prod->descripcion = $descripcion;
         $prod->precio = $precio;
@@ -62,7 +62,7 @@ class ProductoController extends Producto implements IApiUsable
         // Creo el producto
         $prod = new Producto();
         $prod->id = $id;
-        $prod->id_sector = $id_sector;
+        $prod->sector = $id_sector;
         $prod->nombre = $nombre;
         $prod->descripcion = $descripcion;
         $prod->precio = $precio;

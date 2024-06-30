@@ -3,7 +3,7 @@
 class Producto
 {
     public $id;
-    public $id_sector;
+    public $sector;
     public $nombre;
     public $descripcion;
     public $precio;
@@ -14,7 +14,7 @@ class Producto
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (id_sector, nombre, descripcion, precio, tiempo_preparacion) VALUES (:id_sector, :nombre, :descripcion, :precio, :tiempo_preparacion)");
               
-        $consulta->bindValue(':id_sector', $this->id_sector, PDO::PARAM_INT);
+        $consulta->bindValue(':id_sector', $this->sector, PDO::PARAM_INT);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
         $consulta->bindValue(':descripcion', $this->descripcion, PDO::PARAM_STR);
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
@@ -27,7 +27,8 @@ class Producto
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM productos");
+        // $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM productos");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT prod.id, prod.nombre, prod.descripcion, sec.descripcion as sector, prod.precio, prod.tiempo_preparacion FROM productos as prod INNER JOIN sectores as sec ON prod.id_sector = sec.id");
         $consulta->execute();
     
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto');
@@ -36,8 +37,8 @@ class Producto
     public static function obtenerProducto($nombreProducto)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM productos WHERE nombre = :nombreProducto");
-        $consulta->bindValue(':nombreProducto', $nombreProducto, PDO::PARAM_STR);
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT prod.id, prod.nombre, prod.descripcion, sec.descripcion as sector, prod.precio, prod.tiempo_preparacion FROM productos as prod INNER JOIN sectores as sec ON prod.id_sector = sec.id WHERE prod.nombre LIKE :nombreProducto");
+        $consulta->bindValue(':nombreProducto', "%". $nombreProducto . "%", PDO::PARAM_STR);
         $consulta->execute();
     
         return $consulta->fetchObject('Producto');
@@ -48,7 +49,7 @@ class Producto
         $objAccesoDato = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDato->prepararConsulta("UPDATE productos SET id_sector = :id_sector, nombre = :nombre, descripcion = :descripcion, precio = :precio, tiempo_preparacion = :tiempo_preparacion WHERE id = :id");
         
-        $consulta->bindValue(':id_sector', $this->id_sector, PDO::PARAM_INT);
+        $consulta->bindValue(':id_sector', $this->sector, PDO::PARAM_INT);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
         $consulta->bindValue(':descripcion', $this->descripcion, PDO::PARAM_STR);
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
