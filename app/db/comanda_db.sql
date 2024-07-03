@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2024 at 04:23 AM
+-- Generation Time: Jul 03, 2024 at 05:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -164,7 +164,37 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `id_sector`, `nombre`, `descripcion`, `precio`, `tiempo_preparacion`) VALUES
 (1, 4, 'Cosmopolitan', 'Cóctel de martini rojo con cierto matiz a fruta ácida. Vodka, triple sec, jugo de arándanos rojos y jugo de lima. Servido en copa de cóctel, adornado con piel de lima.', 5500, 15),
 (2, 1, 'Hamburguesa completa', 'Medallón de carne con tomate, queso, lechuga, huev', 8500, 25),
-(4, 3, 'Ipa con miel - Pinta', 'India Pale Ale, endulzada con miel. Alta graduación alcohólica.', 3500, 5);
+(4, 3, 'Ipa con miel - Pinta', 'India Pale Ale, endulzada con miel. Alta graduación alcohólica.', 3500, 5),
+(5, 1, 'Hamburguesa Clásica', 'Deliciosa hamburguesa con carne de res, lechuga, tomate y mayonesa.', 10500, 15),
+(6, 2, 'Brownie con Helado', 'Brownie de chocolate servido con una bola de helado de vainilla.', 6750, 10),
+(7, 3, 'Cerveza Artesanal', 'Cerveza artesanal con sabor robusto y notas afrutadas.', 8000, 5),
+(8, 4, 'Mojito Clásico', 'Cóctel refrescante con ron, menta, lima y soda.', 7250, 7),
+(9, 1, 'Pizza Margarita', 'Pizza con salsa de tomate, queso mozzarella y albahaca fresca.', 12000, 20),
+(10, 2, 'Cheesecake de Fresa', 'Tarta de queso cremosa con una capa de fresas frescas.', 7500, 10),
+(11, 3, 'Lager Importada', 'Cerveza lager importada, ligera y refrescante.', 5000, 5),
+(12, 4, 'Margarita', 'Cóctel clásico de tequila con jugo de lima y licor de naranja.', 8500, 8),
+(13, 1, 'Nachos con Queso', 'Tortilla de maíz crujiente cubierta con queso cheddar derretido.', 5250, 10),
+(14, 2, 'Cupcake de Vainilla', 'Pequeño pastel de vainilla decorado con glaseado colorido.', 4000, 8),
+(15, 3, 'IPA Local', 'Cerveza IPA con un intenso sabor a lúpulo y aroma floral.', 7750, 5),
+(16, 4, 'Daiquiri de Fresa', 'Cóctel de ron con fresas frescas y jugo de limón.', 8000, 10),
+(17, 1, 'Ensalada César', 'Ensalada de lechuga romana con aderezo César y crutones.', 7000, 10),
+(18, 2, 'Galletas de Chocolate', 'Galletas crujientes con trozos de chocolate semi-dulce.', 3500, 15),
+(19, 3, 'Stout Oscura', 'Cerveza stout oscura con un toque de café y chocolate.', 6500, 5),
+(20, 4, 'Caipirinha', 'Cóctel brasileño con cachaça, azúcar y lima.', 7000, 7),
+(21, 1, 'Tacos de Pollo', 'Tacos de pollo marinado con cebolla, cilantro y limón.', 8000, 12),
+(22, 2, 'Palomitas de Maíz', 'Palomitas de maíz recién hechas, ligeramente saladas.', 2500, 5),
+(23, 3, 'Cerveza sin Alcohol', 'Cerveza sin alcohol con el mismo gran sabor.', 4000, 5),
+(24, 4, 'Gin Tonic', 'Cóctel de ginebra con agua tónica y una rodaja de limón.', 7500, 8),
+(25, 1, 'Papas Fritas', 'Porción de papas fritas crujientes.', 3500, 10),
+(26, 2, 'Helado de Vainilla', 'Helado cremoso de vainilla.', 3000, 5),
+(27, 3, 'Cerveza de Trigo', 'Cerveza de trigo con un toque afrutado.', 6000, 5),
+(28, 4, 'Martini', 'Cóctel clásico con ginebra y vermut.', 9000, 5),
+(29, 1, 'Sándwich de Pollo', 'Sándwich de pollo a la parrilla con lechuga y tomate.', 6500, 15),
+(30, 2, 'Tarta de Limón', 'Tarta de limón con merengue.', 4500, 10),
+(31, 3, 'Cerveza Roja', 'Cerveza roja con un sabor maltoso.', 7000, 5),
+(32, 4, 'Whisky Sour', 'Cóctel de whisky con jugo de limón y azúcar.', 8500, 5),
+(33, 1, 'Alitas de Pollo', 'Alitas de pollo picantes servidas con salsa ranch.', 7000, 20),
+(34, 2, 'Mousse de Chocolate', 'Postre cremoso de mousse de chocolate.', 5500, 8);
 
 -- --------------------------------------------------------
 
@@ -389,7 +419,7 @@ ALTER TABLE `pedidos_estado`
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `productos_en_pedido`

@@ -477,7 +477,7 @@
 			"response": []
 		},
 		{
-			"name": "22-Login-Mozo",
+			"name": "23-Login-Mozo",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -497,6 +497,25 @@
 					]
 				},
 				"url": "http://localhost:666/auth"
+			},
+			"response": []
+		},
+		{
+			"name": "24-Productos-CargarCSV",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv",
+							"type": "file",
+							"src": "/C:/xampp/htdocs/TP_Comanda/app/CSV_Productos/productos.csv"
+						}
+					]
+				},
+				"url": "http://localhost:666/productos/cargarCSV"
 			},
 			"response": []
 		}

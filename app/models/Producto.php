@@ -73,13 +73,11 @@ class Producto
 
         $archivo = fopen($filePath, "r");
         $headers = fgetcsv($archivo, 1000, ";");
-        // $array = array();
+
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 
         while (($row = fgetcsv($archivo, 1000, ";")) !== FALSE) {
             $data = array_combine($headers, $row);
-            var_dump($data);
-            // array_push($array, $producto);
             $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (id_sector, nombre, descripcion, precio, tiempo_preparacion) VALUES (:id_sector, :nombre, :descripcion, :precio, :tiempo_preparacion)");
               
             $consulta->bindValue(':id_sector', $data["id_sector"], PDO::PARAM_INT);
