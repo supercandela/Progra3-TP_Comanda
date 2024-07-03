@@ -7,15 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "01-Get_Base",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:666"
-			},
-			"response": []
-		},
-		{
 			"name": "02-Usuarios-CargarUno",
 			"request": {
 				"method": "POST",
@@ -25,11 +16,11 @@
 					"urlencoded": [
 						{
 							"key": "nombre_usuario",
-							"value": "alejandro_usuario"
+							"value": "gaston_socio"
 						},
 						{
 							"key": "clave",
-							"value": "123456"
+							"value": "socio1234"
 						},
 						{
 							"key": "id_tipo",
@@ -37,15 +28,15 @@
 						},
 						{
 							"key": "nombre",
-							"value": "Alejandro"
+							"value": "Gastón"
 						},
 						{
 							"key": "apellido",
-							"value": "Bongioanni"
+							"value": "Gómez"
 						},
 						{
 							"key": "fecha_alta",
-							"value": "2024/06/12"
+							"value": "2024/06/28"
 						},
 						{
 							"key": "fecha_baja",
@@ -53,7 +44,7 @@
 						},
 						{
 							"key": "id_estado",
-							"value": "4"
+							"value": "1"
 						}
 					]
 				},
@@ -75,7 +66,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:666/usuarios/candela_usuario"
+				"url": "http://localhost:666/usuarios/francisco_mozo"
 			},
 			"response": []
 		},
@@ -198,7 +189,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:666/productos/cosmopolitan"
+				"url": "http://localhost:666/productos/completa"
 			},
 			"response": []
 		},
@@ -356,16 +347,16 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "id_mesa",
-							"value": "10002",
+							"value": "10003",
 							"type": "text"
 						},
 						{
 							"key": "nombre_cliente",
-							"value": "Nicolás",
+							"value": "Moira",
 							"type": "text"
 						},
 						{
@@ -375,13 +366,24 @@
 						},
 						{
 							"key": "id_mozo",
-							"value": "5",
+							"value": "4",
 							"type": "text"
 						},
 						{
 							"key": "productos_en_pedido",
-							"value": "[{\"id_producto\": \"2\", \"cantidad\": \"1\"}, {\"id_producto\": \"1\", \"cantidad\": \"1\"}]",
+							"value": "[{\"id_producto\": \"1\", \"cantidad\": \"2\"}, {\"id_producto\": \"2\", \"cantidad\": \"2\"}]",
 							"type": "text"
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/Administrator/Desktop/Mesa-Pedidos.jpg"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -420,6 +422,25 @@
 							"language": "json"
 						}
 					}
+				},
+				"url": "http://localhost:666/pedidos"
+			},
+			"response": []
+		},
+		{
+			"name": "21-Pedidos-BorrarUno",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "idPedido",
+							"value": "Kjdr6",
+							"type": "text"
+						}
+					]
 				},
 				"url": "http://localhost:666/pedidos"
 			},

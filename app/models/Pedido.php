@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Producto_en_Pedido.php';
+require_once 'Mesa.php';
 
 class Pedido
 {
@@ -15,7 +16,7 @@ class Pedido
     public $productos_en_pedido;
 
     private static function generarIdAleatorio($longitud = 5) {
-        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $idAleatorio = '';
         $maxIndex = strlen($caracteres) - 1;
     
@@ -26,7 +27,7 @@ class Pedido
         return $idAleatorio;
     }
     
-    public function crearPedido()
+    public function crearPedido($imagen, $extension)
     {
         do {
             //CREAR ID ALEATORIO
@@ -47,13 +48,35 @@ class Pedido
         $consulta->bindValue(':inicio_preparacion', $this->inicio_preparacion, PDO::PARAM_STR);
         $consulta->bindValue(':id_mozo', $this->mozo, PDO::PARAM_INT);
         $consulta->execute();
+        
 
         //Guardo cada producto del pedido
         foreach ($this->productos_en_pedido as $item) {
             //Lo guardo en su tabla
             Producto_en_Pedido::crearProductoEnPedido($idAleatorio, $item["id_producto"], $item["cantidad"]);
         }
+
+        Pedido::GuardarFoto($imagen, $idAleatorio, $this->id_mesa, $extension);
+
+        $mesa = new Mesa();
+        $mesa->id = $this->id_mesa;
+        $mesa->estado = 1;
+        $mesa->modificarMesa();
     } 
+
+    public static function GuardarFoto($foto, $idPedido, $idMesa, $tipo_archivo)
+    {
+        //Carpeta donde voy a guardar los archivos
+        $carpeta_archivos = 'ImagenesPedidos/';
+        // Ruta final, carpeta + nombre del archivo
+        $destino = $carpeta_archivos . $idPedido . "-" . $idMesa . "." . $tipo_archivo;
+
+        if (move_uploaded_file($foto['tmp_name'], $destino)) {
+            echo "La imagen fue guardada exitosamente.\n\n";
+        } else {
+            echo "La foto no pudo ser guardada.\n\n";
+        }
+    }
 
     public static function obtenerIdsDeTodos()
     {
@@ -120,7 +143,7 @@ class Pedido
         //Actualizo cada producto del pedido
         foreach ($this->productos_en_pedido as $item) {
             //Lo guardo en su tabla
-            Producto_en_Pedido::modificarProductoEnPedido($this->id, $item["id_producto"], $item["cantidad"], $item["id_usuario_preparacion"], $item["id_estado_pedido"]);
+            Producto_en_Pedido::modificarProductoEnPedido($this->id, $item["id_producto"], $item["cantidad"], $item["id_usuario_preparacion"], $item["id_estado_pedido"], $item["tiempo_preparacion_prod"]);
         }
     }
 

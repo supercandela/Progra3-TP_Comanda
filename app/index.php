@@ -14,7 +14,12 @@ require __DIR__ . '/../vendor/autoload.php';
 
 require_once './db/AccesoDatos.php';
 require_once './middlewares/Logger.php';
+require_once './middlewares/Parametros.php';
+require_once './middlewares/Roles.php';
 
+require_once './utils/AutentificadorJWT.php';
+
+require_once './controllers/AutentificadorController.php';
 require_once './controllers/UsuarioController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/MesaController.php';
@@ -37,7 +42,9 @@ $app->addBodyParsingMiddleware();
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
   $group->get('[/]', \UsuarioController::class . ':TraerTodos');
   $group->get('/{nombreUsuario}', \UsuarioController::class . ':TraerUno');
-  $group->post('[/]', \UsuarioController::class . ':CargarUno');
+  $group->post('[/]', \UsuarioController::class . ':CargarUno')
+    ->add(new RolesMiddleware(1))
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
   $group->put('[/]', \UsuarioController::class . ':ModificarUno');
   $group->delete('[/]', \UsuarioController::class . ':BorrarUno');
 });
@@ -61,10 +68,15 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidoController::class . ':TraerTodos');
   $group->get('/{idPedido}', \PedidoController::class . ':TraerUno');
-  $group->post('[/]', \PedidoController::class . ':CargarUno');
+  $group->post('[/]', \PedidoController::class . ':CargarUno')
+    ->add(\ParametrosMiddleware::class . ':crearPedidoMW');
   $group->put('[/]', \PedidoController::class . ':ModificarUno');
   $group->delete('[/]', \PedidoController::class . ':BorrarUno');
 });
 
+$app->group('/auth', function (RouteCollectorProxy $group) {
+  $group->post('[/]', \AutentificadorController::class . ':LoginUsuario')
+    ->add(\ParametrosMiddleware::class . ':autenticarUsuarioMW');
+});
 
 $app->run();

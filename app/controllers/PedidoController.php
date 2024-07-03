@@ -15,6 +15,21 @@ class PedidoController extends Pedido implements IApiUsable
         $hora_inicio_prep = $hora_inicio_prep->format('Y-m-d H:i:s');
         $id_mozo = $parametros['id_mozo'];
         $productos_en_pedido = json_decode($parametros['productos_en_pedido'], true);
+        //Data del archivo subido
+        $tipo_archivo = $_FILES['imagen']['type'];
+        $tamano_archivo = $_FILES['imagen']['size'];
+        $extension = "";
+
+        //Guardar Imagen
+        if ((strpos($tipo_archivo, "png") || strpos($tipo_archivo, "jpeg")) && ($tamano_archivo < 300000)) {
+
+            $extension = substr($tipo_archivo, strpos($tipo_archivo, '/') + 1);
+
+        } else {
+            $payload = json_encode(array("mensaje" => "La imagen no tiene un formato o tamaño que sean admitidos."));
+            $response->getBody()->write($payload);
+            return $response->withHeader('Content-Type', 'application/json');  
+        }
 
         $pedido = new Pedido();
         $pedido->id_mesa = $id_mesa;
@@ -23,7 +38,7 @@ class PedidoController extends Pedido implements IApiUsable
         $pedido->inicio_preparacion = $hora_inicio_prep;
         $pedido->mozo = $id_mozo;
         $pedido->productos_en_pedido = $productos_en_pedido;
-        $pedido->crearPedido();
+        $pedido->crearPedido($_FILES['imagen'], $extension);
 
         $payload = json_encode(array("mensaje" => "Pedido creado con exito"));
         $response->getBody()->write($payload);
