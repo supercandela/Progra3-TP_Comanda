@@ -1,0 +1,31 @@
+id_sector;nombre;descripcion;precio;tiempo_preparacion
+1;Hamburguesa Clásica;Deliciosa hamburguesa con carne de res, lechuga, tomate y mayonesa.;10500;15
+2;Brownie con Helado;Brownie de chocolate servido con una bola de helado de vainilla.;6750;10
+3;Cerveza Artesanal;Cerveza artesanal con sabor robusto y notas afrutadas.;8000;5
+4;Mojito Clásico;Cóctel refrescante con ron, menta, lima y soda.;7250;7
+1;Pizza Margarita;Pizza con salsa de tomate, queso mozzarella y albahaca fresca.;12000;20
+2;Cheesecake de Fresa;Tarta de queso cremosa con una capa de fresas frescas.;7500;10
+3;Lager Importada;Cerveza lager importada, ligera y refrescante.;5000;5
+4;Margarita;Cóctel clásico de tequila con jugo de lima y licor de naranja.;8500;8
+1;Nachos con Queso;Tortilla de maíz crujiente cubierta con queso cheddar derretido.;5250;10
+2;Cupcake de Vainilla;Pequeño pastel de vainilla decorado con glaseado colorido.;4000;8
+3;IPA Local;Cerveza IPA con un intenso sabor a lúpulo y aroma floral.;7750;5
+4;Daiquiri de Fresa;Cóctel de ron con fresas frescas y jugo de limón.;8000;10
+1;Ensalada César;Ensalada de lechuga romana con aderezo César y crutones.;7000;10
+2;Galletas de Chocolate;Galletas crujientes con trozos de chocolate semi-dulce.;3500;15
+3;Stout Oscura;Cerveza stout oscura con un toque de café y chocolate.;6500;5
+4;Caipirinha;Cóctel brasileño con cachaça, azúcar y lima.;7000;7
+1;Tacos de Pollo;Tacos de pollo marinado con cebolla, cilantro y limón.;8000;12
+2;Palomitas de Maíz;Palomitas de maíz recién hechas, ligeramente saladas.;2500;5
+3;Cerveza sin Alcohol;Cerveza sin alcohol con el mismo gran sabor.;4000;5
+4;Gin Tonic;Cóctel de ginebra con agua tónica y una rodaja de limón.;7500;8
+1;Papas Fritas;Porción de papas fritas crujientes.;3500;10
+2;Helado de Vainilla;Helado cremoso de vainilla.;3000;5
+3;Cerveza de Trigo;Cerveza de trigo con un toque afrutado.;6000;5
+4;Martini;Cóctel clásico con ginebra y vermut.;9000;5
+1;Sándwich de Pollo;Sándwich de pollo a la parrilla con lechuga y tomate.;6500;15
+2;Tarta de Limón;Tarta de limón con merengue.;4500;10
+3;Cerveza Roja;Cerveza roja con un sabor maltoso.;7000;5
+4;Whisky Sour;Cóctel de whisky con jugo de limón y azúcar.;8500;5
+1;Alitas de Pollo;Alitas de pollo picantes servidas con salsa ranch.;7000;20
+2;Mousse de Chocolate;Postre cremoso de mousse de chocolate.;5500;8

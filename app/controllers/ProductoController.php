@@ -85,4 +85,19 @@ class ProductoController extends Producto implements IApiUsable
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    public function CargarProductosDesdeCSV ($request, $response, $args) {
+        $parametros = $request->getUploadedFiles();
+        $csvFile = $parametros['csv'];
+        if ($csvFile->getError() === UPLOAD_ERR_OK) {
+            Producto::cargarDesdeCSV($csvFile);
+            $payload = json_encode(array("mensaje" => "Archivo cargado con exito"));
+            $response->withStatus(200);
+        } else {
+            $payload = json_encode(array("mensaje" => "Error al cargar el archivo."));
+            $response->withStatus(400);
+        }
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 }

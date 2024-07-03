@@ -42,12 +42,12 @@ $app->addBodyParsingMiddleware();
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
   $group->get('[/]', \UsuarioController::class . ':TraerTodos');
   $group->get('/{nombreUsuario}', \UsuarioController::class . ':TraerUno');
-  $group->post('[/]', \UsuarioController::class . ':CargarUno')
-    ->add(new RolesMiddleware(1))
-    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
+  $group->post('[/]', \UsuarioController::class . ':CargarUno');
   $group->put('[/]', \UsuarioController::class . ':ModificarUno');
   $group->delete('[/]', \UsuarioController::class . ':BorrarUno');
-});
+})
+    ->add(new RolesMiddleware(1))
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
 
 $app->group('/productos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \ProductoController::class . ':TraerTodos');
@@ -55,6 +55,7 @@ $app->group('/productos', function (RouteCollectorProxy $group) {
   $group->post('[/]', \ProductoController::class . ':CargarUno');
   $group->put('[/]', \ProductoController::class . ':ModificarUno');
   $group->delete('[/]', \ProductoController::class . ':BorrarUno');
+  $group->post('/cargarCSV', \ProductoController::class . ':CargarProductosDesdeCSV');
 });
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {

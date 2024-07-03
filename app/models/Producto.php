@@ -66,4 +66,30 @@ class Producto
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
     }
+
+    public static function cargarDesdeCSV ($csvCliente) {
+        $filePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'CSV_Productos\\'.$csvCliente->getClientFilename();
+        $csvCliente->moveTo($filePath);
+
+        $archivo = fopen($filePath, "r");
+        $headers = fgetcsv($archivo, 1000, ";");
+        // $array = array();
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+
+        while (($row = fgetcsv($archivo, 1000, ";")) !== FALSE) {
+            $data = array_combine($headers, $row);
+            var_dump($data);
+            // array_push($array, $producto);
+            $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (id_sector, nombre, descripcion, precio, tiempo_preparacion) VALUES (:id_sector, :nombre, :descripcion, :precio, :tiempo_preparacion)");
+              
+            $consulta->bindValue(':id_sector', $data["id_sector"], PDO::PARAM_INT);
+            $consulta->bindValue(':nombre', $data["nombre"], PDO::PARAM_STR);
+            $consulta->bindValue(':descripcion', $data["descripcion"], PDO::PARAM_STR);
+            $consulta->bindValue(':precio', $data["precio"], PDO::PARAM_STR);
+            $consulta->bindValue(':tiempo_preparacion', $data["tiempo_preparacion"], PDO::PARAM_INT);
+            $consulta->execute();
+        }
+        fclose($archivo);
+        
+    }
 }
