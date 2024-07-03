@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2024 at 11:31 PM
+-- Generation Time: Jul 03, 2024 at 04:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,7 @@ CREATE TABLE `mesas` (
 INSERT INTO `mesas` (`id`, `id_estado`) VALUES
 (10000, 4),
 (10001, 4),
-(10002, 4),
+(10002, 1),
 (10003, 4),
 (10004, 4);
 
@@ -86,7 +86,9 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `inicio_preparacion`, `hora_entrega`, `id_mozo`, `precio_final`) VALUES
+('0ZclL', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
 ('1YCGP', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('4ekje', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
 ('6oWya', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('6x3P9', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('7aYNX', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
@@ -101,19 +103,22 @@ INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `i
 ('hZwuH', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('IIQfk', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('kHWM5', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('Kjdr6', 10002, 'Nicolás', 1, '2024-06-21', NULL, 5, NULL),
 ('lO2VW', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('LUL08', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('MNqIm', 10002, 'María', 1, '2024-07-03', NULL, 4, NULL),
 ('N3zzK', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('ov9gU', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('pIZZH', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('QtcK5', 10003, 'Candela', 1, '2024-06-22', NULL, 5, NULL),
 ('RAtOZ', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('RdFi5', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
 ('S2N9I', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('SBKgK', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
 ('SCnG9', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('tKIpb', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('Tx3Rg', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('vkm1Y', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
+('XMNY5', 10002, 'María', 1, '2024-07-03', NULL, 4, NULL),
 ('YQKEI', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL);
 
 -- --------------------------------------------------------
@@ -132,9 +137,10 @@ CREATE TABLE `pedidos_estado` (
 --
 
 INSERT INTO `pedidos_estado` (`id`, `estado`) VALUES
-(1, 'en preparacion'),
-(2, 'listo para servir'),
-(3, 'entregado');
+(1, 'en cola'),
+(2, 'en preparacion'),
+(3, 'listo para servir'),
+(4, 'entregado');
 
 -- --------------------------------------------------------
 
@@ -172,21 +178,34 @@ CREATE TABLE `productos_en_pedido` (
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `id_usuario_preparacion` int(11) DEFAULT NULL,
-  `id_estado_pedido` int(11) DEFAULT NULL
+  `id_estado_pedido` int(11) DEFAULT NULL,
+  `tiempo_preparacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `productos_en_pedido`
 --
 
-INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`, `id_usuario_preparacion`, `id_estado_pedido`) VALUES
-(1, 'SCnG9', 3, 4, NULL, NULL),
-(2, 'Kjdr6', 2, 1, NULL, NULL),
-(3, 'Kjdr6', 1, 1, NULL, NULL),
-(4, 'QtcK5', 1, 2, NULL, NULL),
-(5, 'QtcK5', 2, 2, NULL, NULL),
-(6, '8pXKh', 1, 2, NULL, NULL),
-(7, '8pXKh', 2, 2, NULL, NULL);
+INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`, `id_usuario_preparacion`, `id_estado_pedido`, `tiempo_preparacion`) VALUES
+(1, 'SCnG9', 2, 4, 4, 1, 0),
+(4, 'QtcK5', 1, 2, 4, 1, 0),
+(5, 'QtcK5', 2, 2, 4, 1, 0),
+(6, '8pXKh', 1, 3, 4, 2, 15),
+(7, '8pXKh', 2, 2, 4, 1, 0),
+(8, '8pXKh', 4, 1, 4, 1, 15),
+(10, '4ekje', 1, 2, NULL, NULL, 0),
+(11, '4ekje', 2, 2, NULL, NULL, 0),
+(12, 'SBKgK', 1, 2, NULL, NULL, 0),
+(13, 'SBKgK', 2, 2, NULL, NULL, 0),
+(14, '0ZclL', 1, 2, NULL, NULL, 0),
+(15, '0ZclL', 2, 2, NULL, NULL, 0),
+(16, 'RdFi5', 1, 2, NULL, NULL, 0),
+(17, 'RdFi5', 2, 2, NULL, NULL, 0),
+(19, '8pXKh', 35, 3, 3, 1, 15),
+(20, 'MNqIm', 1, 2, NULL, NULL, 0),
+(21, 'MNqIm', 2, 2, NULL, NULL, 0),
+(22, 'XMNY5', 1, 2, NULL, NULL, 0),
+(23, 'XMNY5', 2, 2, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -234,7 +253,13 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `clave`, `id_tipo`, `nombre`, `apellido`, `fecha_alta`, `fecha_baja`, `id_estado`) VALUES
 (1, 'candela_usuario', '$2y$10$lGwlbGbJFuD/e', 1, 'Candela', 'Bogado', '2024-06-11', '0000-00-00', 4),
 (2, 'alejandro_usuario', '$2y$10$YjYqyHzNGP358', 1, 'Alejandro', 'Bongioanni', '2024-06-12', '0000-00-00', 4),
-(4, 'francisco_mozo', '$2y$10$Xrko0vKiWysPS/CMhXNwKe7McHOwOHKWVFiT8/onUPxoxKTqCpe7.', 5, 'Francisco', 'Gómez', '2024-06-20', '0000-00-00', 1);
+(4, 'francisco_mozo', '$2y$10$Xrko0vKiWysPS/CMhXNwKe7McHOwOHKWVFiT8/onUPxoxKTqCpe7.', 5, 'Francisco', 'Gómez', '2024-06-20', '0000-00-00', 1),
+(5, 'gaston_socio', '$2y$10$HHvyvWqM5qvcHBCqpbEgEuw7sIgxSHtNjI7E8I3BkUr5PSSjfX9.m', 1, 'Gastón', 'Gómez', '2024-06-28', '0000-00-00', 1),
+(6, 'gaston_socio', '$2y$10$QQuayPToMJ7Wzc75OlvXaOmkDSoVyZTzfSUx8qNbe.0kUqAsx9iWa', 1, 'Gastón', 'Gómez', '2024-06-28', '0000-00-00', 1),
+(7, 'bartender', '$2y$10$yWdO2z4C3lgYU80nxnsdD.jcDY5Ho07iDfEvKyiXHrsF.Kx0cMHM.', 2, 'Joaquin', 'Cortez', '2024-06-28', '0000-00-00', 2),
+(8, 'pastelero_gachi', '$2y$10$0gkUbXv3vqpEEmqzQgxA8.Ti.cnwA9nqQViBjYyz4V.q8baoEjd0O', 6, 'Gabriel', 'Ferro', '2024-06-28', '0000-00-00', 1),
+(9, 'pastelero_gachi', '$2y$10$qR83ShVPFgjYEYoDKGE3RuErSe/Cw122P8XRiwkQYWOSoXMPQr6k2', 6, 'Gabriel', 'Ferro', '2024-06-28', '0000-00-00', 1),
+(10, 'cervecero_pachi', '$2y$10$78ryMu.KQZ3b93qnj0mwWuEjiGtI4igLVMrzxDs/PTDq/evaJ6SoW', 3, 'Patricio', 'Arguello', '2024-06-28', '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -358,7 +383,7 @@ ALTER TABLE `mesas_estado`
 -- AUTO_INCREMENT for table `pedidos_estado`
 --
 ALTER TABLE `pedidos_estado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `productos`
@@ -370,7 +395,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `productos_en_pedido`
 --
 ALTER TABLE `productos_en_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `sectores`
@@ -382,7 +407,7 @@ ALTER TABLE `sectores`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `usuarios_estado`
