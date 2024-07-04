@@ -24,6 +24,7 @@ require_once './controllers/UsuarioController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/MesaController.php';
 require_once './controllers/PedidoController.php';
+require_once './controllers/ProductosEnPedidoController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -46,7 +47,7 @@ $app->group('/usuarios', function (RouteCollectorProxy $group) {
   $group->put('[/]', \UsuarioController::class . ':ModificarUno');
   $group->delete('[/]', \UsuarioController::class . ':BorrarUno');
 })
-    ->add(new RolesMiddleware(1))
+    ->add(new RolesMiddleware([1])) //Roles: 1 - Socio
     ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
 
 $app->group('/productos', function (RouteCollectorProxy $group) {
@@ -59,7 +60,9 @@ $app->group('/productos', function (RouteCollectorProxy $group) {
 });
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \MesaController::class . ':TraerTodos');
+  $group->get('[/]', \MesaController::class . ':TraerTodos')
+    ->add(new RolesMiddleware([1, 5])) //Roles: 1 - Socio / 5 - Mozo
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
   $group->get('/{idMesa}', \MesaController::class . ':TraerUno');
   $group->post('[/]', \MesaController::class . ':CargarUno');
   $group->put('[/]', \MesaController::class . ':ModificarUno');
@@ -70,9 +73,27 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidoController::class . ':TraerTodos');
   $group->get('/{idPedido}', \PedidoController::class . ':TraerUno');
   $group->post('[/]', \PedidoController::class . ':CargarUno')
-    ->add(\ParametrosMiddleware::class . ':crearPedidoMW');
+    ->add(\ParametrosMiddleware::class . ':crearPedidoMW')
+    ->add(new RolesMiddleware([1, 5])) //Roles: 1 - Socio / 5 - Mozo
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
   $group->put('[/]', \PedidoController::class . ':ModificarUno');
   $group->delete('[/]', \PedidoController::class . ':BorrarUno');
+});
+
+$app->group('/productosEnPedido', function (RouteCollectorProxy $group) {
+  $group->get('/cocina', \ProductosEnPedidoController::class . ':TraerTodos')
+    ->add(new RolesMiddleware([1, 4])) //Roles: 1 - Socio / 4 - Cocinero
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
+  $group->get('/candybar', \ProductosEnPedidoController::class . ':TraerTodos')
+    ->add(new RolesMiddleware([1, 6])) //Roles: 1 - Socio / 6 - Pastelero
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
+  $group->get('/cerveceria', \ProductosEnPedidoController::class . ':TraerTodos')
+    ->add(new RolesMiddleware([1, 3])) //Roles: 1 - Socio / 3 - Cervecero
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
+  $group->get('/barra', \ProductosEnPedidoController::class . ':TraerTodos')
+    ->add(new RolesMiddleware([1, 2])) //Roles: 1 - Socio / 2 - Bartender
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
+
 });
 
 $app->group('/auth', function (RouteCollectorProxy $group) {

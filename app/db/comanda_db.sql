@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2024 at 05:39 AM
+-- Generation Time: Jul 04, 2024 at 07:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,11 @@ INSERT INTO `mesas` (`id`, `id_estado`) VALUES
 (10001, 4),
 (10002, 1),
 (10003, 4),
-(10004, 4);
+(10004, 4),
+(10005, 4),
+(10006, 4),
+(10007, 4),
+(10008, 1);
 
 -- --------------------------------------------------------
 
@@ -98,6 +102,7 @@ INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `i
 ('db74f', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('DHz2o', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('FkZ7F', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
+('GGL4S', 10008, 'Belén', 1, '2024-07-04', NULL, 4, NULL),
 ('gn3dr', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('Hi69h', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
 ('hZwuH', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
@@ -217,25 +222,26 @@ CREATE TABLE `productos_en_pedido` (
 --
 
 INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`, `id_usuario_preparacion`, `id_estado_pedido`, `tiempo_preparacion`) VALUES
-(1, 'SCnG9', 2, 4, 4, 1, 0),
+(1, 'SCnG9', 2, 4, 4, 2, 0),
 (4, 'QtcK5', 1, 2, 4, 1, 0),
 (5, 'QtcK5', 2, 2, 4, 1, 0),
 (6, '8pXKh', 1, 3, 4, 2, 15),
 (7, '8pXKh', 2, 2, 4, 1, 0),
 (8, '8pXKh', 4, 1, 4, 1, 15),
-(10, '4ekje', 1, 2, NULL, NULL, 0),
-(11, '4ekje', 2, 2, NULL, NULL, 0),
-(12, 'SBKgK', 1, 2, NULL, NULL, 0),
-(13, 'SBKgK', 2, 2, NULL, NULL, 0),
-(14, '0ZclL', 1, 2, NULL, NULL, 0),
-(15, '0ZclL', 2, 2, NULL, NULL, 0),
-(16, 'RdFi5', 1, 2, NULL, NULL, 0),
-(17, 'RdFi5', 2, 2, NULL, NULL, 0),
-(19, '8pXKh', 35, 3, 3, 1, 15),
-(20, 'MNqIm', 1, 2, NULL, NULL, 0),
-(21, 'MNqIm', 2, 2, NULL, NULL, 0),
-(22, 'XMNY5', 1, 2, NULL, NULL, 0),
-(23, 'XMNY5', 2, 2, NULL, NULL, 0);
+(12, 'SBKgK', 1, 2, 1000, 1, 0),
+(13, 'SBKgK', 2, 2, 1000, 1, 0),
+(14, '0ZclL', 1, 2, 1000, 1, 0),
+(15, '0ZclL', 2, 2, 1000, 1, 0),
+(16, 'RdFi5', 1, 2, 1000, 1, 0),
+(17, 'RdFi5', 2, 2, 1000, 1, 0),
+(20, 'MNqIm', 1, 2, 1000, 1, 0),
+(21, 'MNqIm', 2, 2, 1000, 1, 0),
+(22, 'XMNY5', 1, 2, 1000, 1, 0),
+(23, 'XMNY5', 2, 2, 1000, 1, 0),
+(24, 'GGL4S', 8, 2, 1000, 1, 0),
+(25, 'GGL4S', 10, 1, 1000, 1, 0),
+(26, 'GGL4S', 11, 2, 1000, 1, 0),
+(27, 'GGL4S', 9, 1, 1000, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -284,12 +290,12 @@ INSERT INTO `usuarios` (`id`, `nombre_usuario`, `clave`, `id_tipo`, `nombre`, `a
 (1, 'candela_usuario', '$2y$10$lGwlbGbJFuD/e', 1, 'Candela', 'Bogado', '2024-06-11', '0000-00-00', 4),
 (2, 'alejandro_usuario', '$2y$10$YjYqyHzNGP358', 1, 'Alejandro', 'Bongioanni', '2024-06-12', '0000-00-00', 4),
 (4, 'francisco_mozo', '$2y$10$Xrko0vKiWysPS/CMhXNwKe7McHOwOHKWVFiT8/onUPxoxKTqCpe7.', 5, 'Francisco', 'Gómez', '2024-06-20', '0000-00-00', 1),
-(5, 'gaston_socio', '$2y$10$HHvyvWqM5qvcHBCqpbEgEuw7sIgxSHtNjI7E8I3BkUr5PSSjfX9.m', 1, 'Gastón', 'Gómez', '2024-06-28', '0000-00-00', 1),
-(6, 'gaston_socio', '$2y$10$QQuayPToMJ7Wzc75OlvXaOmkDSoVyZTzfSUx8qNbe.0kUqAsx9iWa', 1, 'Gastón', 'Gómez', '2024-06-28', '0000-00-00', 1),
+(5, 'gaston_socio', '$2y$10$HHvyvWqM5qvcHBCqpbEgEuw7sIgxSHtNjI7E8I3BkUr5PSSjfX9.m', 1, 'Gastón', 'Pérez', '2024-06-28', '0000-00-00', 1),
 (7, 'bartender', '$2y$10$yWdO2z4C3lgYU80nxnsdD.jcDY5Ho07iDfEvKyiXHrsF.Kx0cMHM.', 2, 'Joaquin', 'Cortez', '2024-06-28', '0000-00-00', 2),
 (8, 'pastelero_gachi', '$2y$10$0gkUbXv3vqpEEmqzQgxA8.Ti.cnwA9nqQViBjYyz4V.q8baoEjd0O', 6, 'Gabriel', 'Ferro', '2024-06-28', '0000-00-00', 1),
-(9, 'pastelero_gachi', '$2y$10$qR83ShVPFgjYEYoDKGE3RuErSe/Cw122P8XRiwkQYWOSoXMPQr6k2', 6, 'Gabriel', 'Ferro', '2024-06-28', '0000-00-00', 1),
-(10, 'cervecero_pachi', '$2y$10$78ryMu.KQZ3b93qnj0mwWuEjiGtI4igLVMrzxDs/PTDq/evaJ6SoW', 3, 'Patricio', 'Arguello', '2024-06-28', '0000-00-00', 1);
+(10, 'cervecero_pachi', '$2y$10$78ryMu.KQZ3b93qnj0mwWuEjiGtI4igLVMrzxDs/PTDq/evaJ6SoW', 3, 'Patricio', 'Arguello', '2024-06-28', '0000-00-00', 1),
+(11, 'cocinero_tano', '$2y$10$hxJfyxGJaOK.q7GWV57aBOv5O7oICyAjwXB1Iz72cgc8AmG/2UXza', 4, 'Bob', 'Esponja', '2024-06-30', '0000-00-00', 2),
+(1000, 'No asignado', '', 1000, '', '', '0000-00-00', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -333,7 +339,8 @@ INSERT INTO `usuarios_tipo` (`id`, `rol`) VALUES
 (3, 'cervecero'),
 (4, 'cocinero'),
 (5, 'mozo'),
-(6, 'pastelero');
+(6, 'pastelero'),
+(1000, 'No asignado');
 
 --
 -- Indexes for dumped tables
@@ -425,7 +432,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `productos_en_pedido`
 --
 ALTER TABLE `productos_en_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `sectores`
@@ -437,7 +444,7 @@ ALTER TABLE `sectores`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 
 --
 -- AUTO_INCREMENT for table `usuarios_estado`
@@ -449,7 +456,7 @@ ALTER TABLE `usuarios_estado`
 -- AUTO_INCREMENT for table `usuarios_tipo`
 --
 ALTER TABLE `usuarios_tipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

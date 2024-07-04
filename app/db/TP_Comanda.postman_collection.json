@@ -22,27 +22,27 @@
 					"urlencoded": [
 						{
 							"key": "nombre_usuario",
-							"value": "cervecero_pachi"
+							"value": "cocinero_tano"
 						},
 						{
 							"key": "clave",
-							"value": "cervecero123"
+							"value": "cocina123"
 						},
 						{
 							"key": "id_tipo",
-							"value": "3"
+							"value": "4"
 						},
 						{
 							"key": "nombre",
-							"value": "Patricio"
+							"value": "Bob"
 						},
 						{
 							"key": "apellido",
-							"value": "Arguello"
+							"value": "Esponja"
 						},
 						{
 							"key": "fecha_alta",
-							"value": "2024/06/28"
+							"value": "2024/06/30"
 						},
 						{
 							"key": "fecha_baja",
@@ -50,7 +50,7 @@
 						},
 						{
 							"key": "id_estado",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				},
@@ -61,6 +61,12 @@
 		{
 			"name": "03-Usuarios-TraerTodos",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk5NzA5NjIsImRhdGEiOnsidXN1YXJpbyI6Imdhc3Rvbl9zb2NpbyIsInJvbCI6MX0sImFwcCI6IlRQIENvbWFuZGEifQ.Y7qP_9RW1FyUk_waZA-PmxmOO5-3RdPC_xh2ldsUNu8"
+					}
+				},
 				"method": "GET",
 				"header": [],
 				"url": "http://localhost:666/usuarios"
@@ -272,7 +278,7 @@
 					"urlencoded": [
 						{
 							"key": "id",
-							"value": "10005",
+							"value": "10008",
 							"type": "text"
 						},
 						{
@@ -289,6 +295,12 @@
 		{
 			"name": "13-Mesas-TraerTodos",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk5NzE2ODQsImRhdGEiOnsidXN1YXJpbyI6ImZyYW5jaXNjb19tb3pvIiwicm9sIjo1fSwiYXBwIjoiVFAgQ29tYW5kYSJ9.khc0LfUJoTsSCfhaUym5d-_Fy34Krz8kQhuorCJ7SMQ"
+					}
+				},
 				"method": "GET",
 				"header": [],
 				"url": "http://localhost:666/mesas"
@@ -350,6 +362,12 @@
 		{
 			"name": "17-Pedidos-CargarUno",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk5NzE2ODQsImRhdGEiOnsidXN1YXJpbyI6ImZyYW5jaXNjb19tb3pvIiwicm9sIjo1fSwiYXBwIjoiVFAgQ29tYW5kYSJ9.khc0LfUJoTsSCfhaUym5d-_Fy34Krz8kQhuorCJ7SMQ"
+					}
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -357,12 +375,12 @@
 					"formdata": [
 						{
 							"key": "id_mesa",
-							"value": "10003",
+							"value": "10008",
 							"type": "text"
 						},
 						{
 							"key": "nombre_cliente",
-							"value": "Moira",
+							"value": "Belén",
 							"type": "text"
 						},
 						{
@@ -377,7 +395,7 @@
 						},
 						{
 							"key": "productos_en_pedido",
-							"value": "[{\"id_producto\": \"1\", \"cantidad\": \"2\"}, {\"id_producto\": \"2\", \"cantidad\": \"2\"}]",
+							"value": "[{\"id_producto\": \"8\", \"cantidad\": \"2\"},  {\"id_producto\": \"10\", \"cantidad\": \"1\"}, {\"id_producto\": \"11\", \"cantidad\": \"2\"}, {\"id_producto\": \"9\", \"cantidad\": \"1\"}]",
 							"type": "text"
 						},
 						{
@@ -411,7 +429,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:666/pedidos/8pXKh"
+				"url": "http://localhost:666/pedidos/GGL4S"
 			},
 			"response": []
 		},
@@ -422,7 +440,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"8pXKh\",\r\n    \"id_mesa\": 10004,\r\n    \"cliente_nombre\": \"Moira\",\r\n    \"id_estado_pedido\": 2,\r\n    \"inicio_preparacion\": \"2024-06-22\",\r\n    \"hora_entrega\": null,\r\n    \"id_mozo\": 5,\r\n    \"precio_final\": null,\r\n    \"productos_en_pedido\": [\r\n        {\r\n            \"id_producto\": 1,\r\n            \"cantidad\": 3,\r\n            \"id_usuario_preparacion\": 3,\r\n            \"id_estado_pedido\": 2,\r\n            \"tiempo_preparacion_prod\": 15\r\n        },\r\n        {\r\n            \"id_producto\": 4,\r\n            \"cantidad\": 1,\r\n            \"id_usuario_preparacion\": 4,\r\n            \"id_estado_pedido\": 1,\r\n            \"tiempo_preparacion_prod\": 15\r\n        },\r\n                {\r\n            \"id_producto\": 35,\r\n            \"cantidad\": 3,\r\n            \"id_usuario_preparacion\": 3,\r\n            \"id_estado_pedido\": 1,\r\n            \"tiempo_preparacion_prod\": 15\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"id\": \"8pXKh\",\r\n    \"id_mesa\": 10004,\r\n    \"cliente_nombre\": \"Moira\",\r\n    \"id_estado_pedido\": 2,\r\n    \"inicio_preparacion\": \"2024-06-22\",\r\n    \"hora_entrega\": null,\r\n    \"id_mozo\": 5,\r\n    \"precio_final\": null,\r\n    \"productos_en_pedido\": [\r\n        {\r\n            \"id_producto\": 1,\r\n            \"cantidad\": 3,\r\n            \"id_usuario_preparacion\": 4,\r\n            \"id_estado_pedido\": 2,\r\n            \"tiempo_preparacion_prod\": 15\r\n        },\r\n        {\r\n            \"id_producto\": 4,\r\n            \"cantidad\": 1,\r\n            \"id_usuario_preparacion\": 4,\r\n            \"id_estado_pedido\": 1,\r\n            \"tiempo_preparacion_prod\": 15\r\n        },\r\n                {\r\n            \"id_producto\": 1,\r\n            \"cantidad\": 3,\r\n            \"id_usuario_preparacion\": 4,\r\n            \"id_estado_pedido\": 2,\r\n            \"tiempo_preparacion_prod\": 15\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -501,7 +519,109 @@
 			"response": []
 		},
 		{
-			"name": "24-Productos-CargarCSV",
+			"name": "24-Login-Bartender",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "usuario",
+							"value": "bartender",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "bar123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/auth"
+			},
+			"response": []
+		},
+		{
+			"name": "25-Login-Pastelero",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "usuario",
+							"value": "pastelero_gachi",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "candybar123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/auth"
+			},
+			"response": []
+		},
+		{
+			"name": "26-Login-Cervecero",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "usuario",
+							"value": "cervecero_pachi",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "cervecero123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/auth"
+			},
+			"response": []
+		},
+		{
+			"name": "27-Login-Cocinero",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "usuario",
+							"value": "cocinero_tano",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "cocina123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/auth"
+			},
+			"response": []
+		},
+		{
+			"name": "28-Productos-CargarCSV",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -516,6 +636,84 @@
 					]
 				},
 				"url": "http://localhost:666/productos/cargarCSV"
+			},
+			"response": []
+		},
+		{
+			"name": "29-Listar_ProductosEnPedidos-Cocina",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAwNTc3NDQsImRhdGEiOnsidXN1YXJpbyI6ImNvY2luZXJvX3Rhbm8iLCJyb2wiOjR9LCJhcHAiOiJUUCBDb21hbmRhIn0.asT12N9FecRqVFpBxYviJdLBq32Red2QbQhZyfLC0wc"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productosEnPedido/cocina"
+			},
+			"response": []
+		},
+		{
+			"name": "30-Listar_ProductosEnPedidos-Candybar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAwNTc0NzksImRhdGEiOnsidXN1YXJpbyI6InBhc3RlbGVyb19nYWNoaSIsInJvbCI6Nn0sImFwcCI6IlRQIENvbWFuZGEifQ.JzEVuPFfCEOPV4BHyEE56UOkoTactmxbdQj91z2wuYY"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productosEnPedido/candybar"
+			},
+			"response": []
+		},
+		{
+			"name": "31-Listar_ProductosEnPedidos-Cerveceria",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAwNTc1NzUsImRhdGEiOnsidXN1YXJpbyI6ImNlcnZlY2Vyb19wYWNoaSIsInJvbCI6M30sImFwcCI6IlRQIENvbWFuZGEifQ.Bq8VFRy-yHMXZ3ju4An2gMPEBOrIrG0pslAT_Byob_E"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productosEnPedido/cerveceria"
+			},
+			"response": []
+		},
+		{
+			"name": "32-Listar_ProductosEnPedidos-Barra",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAwNTc0MDMsImRhdGEiOnsidXN1YXJpbyI6ImJhcnRlbmRlciIsInJvbCI6Mn0sImFwcCI6IlRQIENvbWFuZGEifQ.wd9RBnM-f7RTUmhk2DtqFE-uwOc_3xkxrNJL27UsiVM"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productosEnPedido/barra"
+			},
+			"response": []
+		},
+		{
+			"name": "33-ModificarProductoEnPedido",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 7,\r\n    \"usuario_preparacion\": 3,\r\n    \"estado_pedido\": 2,\r\n    \"tiempo_preparacion_prod\": 10\r\n},",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:666/productosEnPedido/cocina"
 			},
 			"response": []
 		}
