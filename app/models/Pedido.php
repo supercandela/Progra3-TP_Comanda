@@ -155,4 +155,22 @@ class Pedido
         $consulta->execute();
         Producto_en_Pedido::borrarProductosEnPedido($id);
     }
+
+    
+    public function modificarEstados($id_estado_mesa)
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE pedidos SET id_estado_pedido = :id_estado_pedido, hora_entrega = :hora_entrega WHERE id = :id");
+        
+        $consulta->bindValue(':id_estado_pedido', $this->estado_pedido, PDO::PARAM_INT);
+        $consulta->bindValue(':hora_entrega', $this->hora_entrega, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $consulta->execute();
+
+        $mesa = new Mesa();
+        $mesa->id = $this->id_mesa;
+        $mesa->estado = $id_estado_mesa;
+        $mesa->modificarMesa();
+    }
 }

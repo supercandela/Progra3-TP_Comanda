@@ -29,7 +29,7 @@ class Producto_en_Pedido
     public static function obtenerProductosPorIdDePedido($idPedido)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT prod.nombre as producto, pp.cantidad as cantidad, u.nombre_usuario as usuario_preparacion, e.estado as estado_pedido, pp.tiempo_preparacion as tiempo_preparacion_prod FROM productos_en_pedido as pp INNER JOIN productos as prod on pp.id_producto = prod.id INNER JOIN usuarios as u ON pp.id_usuario_preparacion = u.id INNER JOIN pedidos_estado as e ON pp.id_estado_pedido = e.id WHERE pp.id_pedido = :id_pedido;");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT pp.id as id, pp.id_pedido as id_pedido, prod.nombre as producto, pp.cantidad as cantidad, u.nombre_usuario as usuario_preparacion, e.estado as estado_pedido, pp.tiempo_preparacion as tiempo_preparacion_prod, sectores.descripcion as sector FROM productos_en_pedido as pp INNER JOIN productos as prod on pp.id_producto = prod.id INNER JOIN usuarios as u ON pp.id_usuario_preparacion = u.id INNER JOIN pedidos_estado as e ON pp.id_estado_pedido = e.id JOIN sectores ON prod.id_sector = sectores.id WHERE pp.id_pedido = :id_pedido;");
 
         $consulta->bindValue(':id_pedido', $idPedido, PDO::PARAM_STR);
         $consulta->execute();
@@ -87,5 +87,18 @@ class Producto_en_Pedido
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto_en_Pedido');
+    }
+
+    public static function cambiarEstadoProductoEnPedidoPorId ($idProductoEnPedido, $usuario_preparacion, $estado_pedido, $tiempo_preparacion_prod)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+
+        $consulta = $objAccesoDatos->prepararConsulta("UPDATE productos_en_pedido SET id_usuario_preparacion = :id_usuario_preparacion, id_estado_pedido = :id_estado_pedido, tiempo_preparacion = :tiempo_preparacion_prod WHERE id = :id_producto_en_pedido");
+        
+        $consulta->bindValue(':id_usuario_preparacion', $usuario_preparacion, PDO::PARAM_INT);
+        $consulta->bindValue(':id_estado_pedido', $estado_pedido, PDO::PARAM_INT);
+        $consulta->bindValue(':tiempo_preparacion_prod', $tiempo_preparacion_prod, PDO::PARAM_INT);
+        $consulta->bindValue(':id_producto_en_pedido', $idProductoEnPedido, PDO::PARAM_INT);
+        $consulta->execute();
     }
 }

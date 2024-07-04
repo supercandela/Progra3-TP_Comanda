@@ -702,18 +702,48 @@
 		{
 			"name": "33-ModificarProductoEnPedido",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAxMTYyNzYsImRhdGEiOnsidXN1YXJpbyI6ImNvY2luZXJvX3Rhbm8iLCJyb2wiOjR9LCJhcHAiOiJUUCBDb21hbmRhIn0.hwkkZsPyvx1cPp6oe08YD1DeLfoE75H5kdIkXrGUBbE"
+					}
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 7,\r\n    \"usuario_preparacion\": 3,\r\n    \"estado_pedido\": 2,\r\n    \"tiempo_preparacion_prod\": 10\r\n},",
+					"raw": "{\r\n    \"id\": 5,\r\n    \"usuario_preparacion\": 11,\r\n    \"estado_pedido\": 4,\r\n    \"tiempo_preparacion_prod\": 15\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:666/productosEnPedido/cocina"
+				"url": "http://localhost:666/productosEnPedido/productos"
+			},
+			"response": []
+		},
+		{
+			"name": "33-ModificarPedido-Estado y Mesa-Estado",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAxMjEyNTUsImRhdGEiOnsidXN1YXJpbyI6ImZyYW5jaXNjb19tb3pvIiwicm9sIjo1fSwiYXBwIjoiVFAgQ29tYW5kYSJ9.gyo_VJpVbEOK_lCYTBOUo2rEcWlZ7JNg4VgzeK8ai0o"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"QtcK5\",\r\n    \"id_mesa\": 10003,\r\n    \"mesa_estado\": 2,\r\n    \"estado_pedido\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:666/pedidos/estado"
 			},
 			"response": []
 		}

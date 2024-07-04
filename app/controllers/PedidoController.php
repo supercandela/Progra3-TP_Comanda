@@ -107,4 +107,29 @@ class PedidoController extends Pedido implements IApiUsable
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    public function ModificarEstadoPedido($request, $response, $args)
+    {
+        $parametros = $request->getParsedBody();
+        // Tomo los parámetros de la variable
+        $id = $parametros['id'];
+        $id_mesa = $parametros['id_mesa'];
+        $mesa_estado = $parametros['mesa_estado'];
+        $estado_pedido = $parametros['estado_pedido'];
+        $hora_entrega = new DateTime();
+        $hora_entrega = $hora_entrega->format('Y-m-d H:i:s');
+
+        $pedido = new Pedido();
+        $pedido->id = $id;
+        $pedido->id_mesa = $id_mesa;
+        $pedido->estado_pedido = $estado_pedido;
+        $pedido->hora_entrega = $hora_entrega;
+
+        $pedido->modificarEstados($mesa_estado);
+
+        $payload = json_encode(array("mensaje" => "Pedido modificado con exito"));
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 }

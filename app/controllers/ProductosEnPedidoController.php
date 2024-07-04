@@ -32,4 +32,22 @@ class ProductosEnPedidoController extends Producto_en_Pedido
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    public function ModificarUno ($request, $response, $args) 
+    {
+        $parametros = $request->getParsedBody();
+        // Tomo los parámetros de la variable
+
+        $idProductoEnPedido = $parametros['id'];
+        $usuario_preparacion = $parametros['usuario_preparacion'];
+        $estado_pedido = $parametros['estado_pedido'];
+        $tiempo_preparacion_prod = $parametros['tiempo_preparacion_prod'];
+
+        Producto_en_Pedido::cambiarEstadoProductoEnPedidoPorId($idProductoEnPedido, $usuario_preparacion, $estado_pedido, $tiempo_preparacion_prod);
+
+        $payload = json_encode(array("mensaje" => "Producto en pedido modificado con éxito"));
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 }

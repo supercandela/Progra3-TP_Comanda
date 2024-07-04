@@ -78,6 +78,10 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
     ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
   $group->put('[/]', \PedidoController::class . ':ModificarUno');
   $group->delete('[/]', \PedidoController::class . ':BorrarUno');
+
+  $group->put('/estado', \PedidoController::class . ':ModificarEstadoPedido')
+    ->add(new RolesMiddleware([1, 5])) //Roles: 1 - Socio / 5 - Mozo
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
 });
 
 $app->group('/productosEnPedido', function (RouteCollectorProxy $group) {
@@ -92,6 +96,9 @@ $app->group('/productosEnPedido', function (RouteCollectorProxy $group) {
     ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
   $group->get('/barra', \ProductosEnPedidoController::class . ':TraerTodos')
     ->add(new RolesMiddleware([1, 2])) //Roles: 1 - Socio / 2 - Bartender
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
+  $group->put('/productos', \ProductosEnPedidoController::class . ':ModificarUno')
+    ->add(new RolesMiddleware([1, 2, 3, 4, 5, 6])) //Roles: 1 - Socio / 2 - Bartender / 3 - Cervecero / 4 - Cocinero / 5 - Mozo / 6 - Pastelero
     ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
 
 });

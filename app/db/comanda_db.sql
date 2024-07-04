@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2024 at 07:06 AM
+-- Generation Time: Jul 05, 2024 at 12:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,7 @@ INSERT INTO `mesas` (`id`, `id_estado`) VALUES
 (10000, 4),
 (10001, 4),
 (10002, 1),
-(10003, 4),
+(10003, 2),
 (10004, 4),
 (10005, 4),
 (10006, 4),
@@ -114,7 +114,7 @@ INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `i
 ('N3zzK', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('ov9gU', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('pIZZH', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('QtcK5', 10003, 'Candela', 1, '2024-06-22', NULL, 5, NULL),
+('QtcK5', 10003, 'Candela', 4, '2024-06-22', '2024-07-04', 5, NULL),
 ('RAtOZ', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
 ('RdFi5', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
 ('S2N9I', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
@@ -223,8 +223,8 @@ CREATE TABLE `productos_en_pedido` (
 
 INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`, `id_usuario_preparacion`, `id_estado_pedido`, `tiempo_preparacion`) VALUES
 (1, 'SCnG9', 2, 4, 4, 2, 0),
-(4, 'QtcK5', 1, 2, 4, 1, 0),
-(5, 'QtcK5', 2, 2, 4, 1, 0),
+(4, 'QtcK5', 1, 2, 11, 4, 15),
+(5, 'QtcK5', 2, 2, 11, 4, 15),
 (6, '8pXKh', 1, 3, 4, 2, 15),
 (7, '8pXKh', 2, 2, 4, 1, 0),
 (8, '8pXKh', 4, 1, 4, 1, 15),
