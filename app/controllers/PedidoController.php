@@ -132,4 +132,38 @@ class PedidoController extends Pedido implements IApiUsable
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * Cierra mesa
+     * Calcula precio final del pedido
+     * Habilita la encuesta
+     */
+    public function CerrarPedido ($request, $response, $args)
+    {
+        $parametros = $request->getParsedBody();
+        $pedidoId = $parametros['idPedido'];
+        $id_mesa = $parametros['id_mesa'];
+        $mesa_estado = $parametros['estado_mesa'];
+
+        $pedido = new Pedido();
+        $pedido->id = $pedidoId;
+        $pedido->id_mesa = $id_mesa;
+
+        $payload = $pedido->calcularPrecioPedidoYCerrarMesa($mesa_estado);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    public function ChequearEstadoPedido ($request, $response, $args)
+    {
+
+        $parametros = $request->getQueryParams();
+        $mesa = $parametros["id_mesa"];
+        $pedido = $parametros["id_pedido"];
+        $payload = Pedido::verEstadoPedido($pedido, $mesa);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 }

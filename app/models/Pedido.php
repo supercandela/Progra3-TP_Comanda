@@ -173,4 +173,62 @@ class Pedido
         $mesa->estado = $id_estado_mesa;
         $mesa->modificarMesa();
     }
+
+    public function calcularPrecioPedidoYCerrarMesa ($id_estado_mesa)
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+        //calcular precio en pedido
+
+        //Traer todos los productos del pedido
+        $consulta = $objAccesoDato->prepararConsulta("SELECT productos.nombre, productos_en_pedido.cantidad, productos.precio FROM productos_en_pedido JOIN productos ON productos_en_pedido.id_producto = productos.id WHERE productos_en_pedido.id_pedido = :idPedido");        
+        $consulta->bindValue(':idPedido', $this->id, PDO::PARAM_STR);
+        $consulta->execute();
+        
+        $data = $consulta->fetchAll(PDO::FETCH_NAMED);
+        $total = 0;
+
+        //Calcular precio del producto * cantidad
+        //Sumar los valores individuales
+        foreach ($data as $producto) {
+            $total += $producto["cantidad"] * $producto["precio"];
+        }
+
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE pedidos SET precio_final = :precio WHERE id = :id");
+
+        //Actualizo precio en pedido
+        $consulta->bindValue(':precio', $total, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $consulta->execute();
+
+        $payload = json_encode(array("Precio Final" => $total, "Detalle" => $data));
+        
+        //cambiar mesa a cerrada
+        $mesa = new Mesa();
+        $mesa->id = $this->id_mesa;
+        $mesa->estado = $id_estado_mesa;
+        $mesa->modificarMesa();
+        
+        //habilitar encuesta
+        $consulta = $objAccesoDato->prepararConsulta("INSERT INTO encuestas (id_mesa, id_pedido) VALUES (:id_mesa, :id_pedido)");
+
+        //Actualizo precio en pedido
+        $consulta->bindValue(':id_mesa', $this->id_mesa, PDO::PARAM_INT);
+        $consulta->bindValue(':id_pedido', $this->id, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $payload;
+    }
+
+    public static function verEstadoPedido($pedido, $mesa)
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+
+        $consulta = $objAccesoDato->prepararConsulta("SELECT pedidos.id, pedidos.id_mesa, pedidos_estado.estado FROM pedidos JOIN pedidos_estado ON pedidos.id_estado_pedido = pedidos_estado.id WHERE pedidos.id = :pedido AND pedidos.id_mesa = :mesa");
+        $consulta->bindValue(':pedido', $pedido, PDO::PARAM_STR);
+        $consulta->bindValue(':mesa', $mesa, PDO::PARAM_INT);
+        $consulta->execute();
+        
+        $data = $consulta->fetchAll(PDO::FETCH_NAMED);
+        return json_encode($data);
+    }
 }

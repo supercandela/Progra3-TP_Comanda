@@ -50,4 +50,33 @@ class ProductosEnPedidoController extends Producto_en_Pedido
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    public function TraerTodosPorEstado($request, $response, $args)
+    {
+        $uri = $request->getUri();
+        $path = $uri->getPath();
+        $estado = str_replace("/productosEnPedido/", "", $path);
+        switch ($estado) {
+            case "en-cola":
+                $estadoAListar = 1;
+                break;
+            case "en-preparacion":
+                $estadoAListar = 2;
+                break;
+            case "listo-servir":
+                $estadoAListar = 3;
+                break;
+            case "entregado":
+                $estadoAListar = 4;
+                break;
+            default:
+                $estadoAListar = 1; //en-cola
+                break;
+        }
+        $lista = Producto_en_Pedido::listarProductosPorEstado($estadoAListar);
+        $payload = json_encode(array("Lista" => $lista));
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 }

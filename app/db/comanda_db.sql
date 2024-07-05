@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2024 at 12:08 AM
+-- Generation Time: Jul 05, 2024 at 10:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `encuestas`
+--
+
+CREATE TABLE `encuestas` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_mesa` int(10) UNSIGNED NOT NULL,
+  `id_pedido` varchar(10) NOT NULL,
+  `nota_restaurante` int(10) UNSIGNED NOT NULL,
+  `nota_mesa` int(10) UNSIGNED NOT NULL,
+  `nota_mozo` int(10) UNSIGNED NOT NULL,
+  `nota_cocinero` int(10) UNSIGNED NOT NULL,
+  `comentarios` varchar(66) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `encuestas`
+--
+
+INSERT INTO `encuestas` (`id`, `id_mesa`, `id_pedido`, `nota_restaurante`, `nota_mesa`, `nota_mozo`, `nota_cocinero`, `comentarios`) VALUES
+(1, 10004, '8pXKh', 8, 8, 8, 8, 'Todo OK');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mesas`
 --
 
@@ -38,10 +62,10 @@ CREATE TABLE `mesas` (
 
 INSERT INTO `mesas` (`id`, `id_estado`) VALUES
 (10000, 4),
-(10001, 4),
+(10001, 2),
 (10002, 1),
 (10003, 2),
-(10004, 4),
+(10004, 2),
 (10005, 4),
 (10006, 4),
 (10007, 4),
@@ -79,8 +103,8 @@ CREATE TABLE `pedidos` (
   `id_mesa` int(11) NOT NULL,
   `cliente_nombre` varchar(20) NOT NULL,
   `id_estado_pedido` int(11) NOT NULL,
-  `inicio_preparacion` date NOT NULL,
-  `hora_entrega` date DEFAULT NULL,
+  `inicio_preparacion` datetime NOT NULL,
+  `hora_entrega` datetime DEFAULT NULL,
   `id_mozo` int(11) NOT NULL,
   `precio_final` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -90,41 +114,41 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `inicio_preparacion`, `hora_entrega`, `id_mozo`, `precio_final`) VALUES
-('0ZclL', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
-('1YCGP', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('4ekje', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
-('6oWya', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('6x3P9', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('7aYNX', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('8pXKh', 10004, 'Moira', 2, '2024-06-22', NULL, 5, NULL),
-('c1nhQ', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
-('cZA76', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
-('db74f', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('DHz2o', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('FkZ7F', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
-('GGL4S', 10008, 'Belén', 1, '2024-07-04', NULL, 4, NULL),
-('gn3dr', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('Hi69h', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL),
-('hZwuH', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('IIQfk', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('kHWM5', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('lO2VW', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('LUL08', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('MNqIm', 10002, 'María', 1, '2024-07-03', NULL, 4, NULL),
-('N3zzK', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('ov9gU', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('pIZZH', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('QtcK5', 10003, 'Candela', 4, '2024-06-22', '2024-07-04', 5, NULL),
-('RAtOZ', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('RdFi5', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
-('S2N9I', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('SBKgK', 10003, 'Moira', 1, '2024-07-01', NULL, 4, NULL),
-('SCnG9', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('tKIpb', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('Tx3Rg', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('vkm1Y', 10001, 'Diego', 1, '2024-06-21', NULL, 5, NULL),
-('XMNY5', 10002, 'María', 1, '2024-07-03', NULL, 4, NULL),
-('YQKEI', 10004, 'Moira', 1, '2024-06-22', NULL, 5, NULL);
+('0ZclL', 10003, 'Moira', 4, '2024-07-01 00:00:00', '2024-07-05 00:00:00', 4, NULL),
+('1YCGP', 10001, 'Diego', 4, '2024-06-21 00:00:00', '2024-07-05 19:58:46', 5, NULL),
+('4ekje', 10003, 'Moira', 1, '2024-07-01 00:00:00', NULL, 4, NULL),
+('6oWya', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('6x3P9', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('7aYNX', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('8pXKh', 10004, 'Moira', 4, '2024-06-22 00:00:00', '2024-07-05 21:10:10', 5, 37000),
+('c1nhQ', 10004, 'Moira', 1, '2024-06-22 00:00:00', NULL, 5, NULL),
+('cZA76', 10004, 'Moira', 1, '2024-06-22 00:00:00', NULL, 5, NULL),
+('db74f', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('DHz2o', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('FkZ7F', 10004, 'Moira', 1, '2024-06-22 00:00:00', NULL, 5, NULL),
+('GGL4S', 10008, 'Belén', 1, '2024-07-04 00:00:00', NULL, 4, NULL),
+('gn3dr', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('Hi69h', 10004, 'Moira', 1, '2024-06-22 00:00:00', NULL, 5, NULL),
+('hZwuH', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('IIQfk', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('kHWM5', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('lO2VW', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('LUL08', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('MNqIm', 10002, 'María', 1, '2024-07-03 00:00:00', NULL, 4, NULL),
+('N3zzK', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('ov9gU', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('pIZZH', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('QtcK5', 10003, 'Candela', 4, '2024-06-22 00:00:00', '2024-07-04 00:00:00', 5, NULL),
+('RAtOZ', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('RdFi5', 10003, 'Moira', 1, '2024-07-01 00:00:00', NULL, 4, NULL),
+('S2N9I', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('SBKgK', 10003, 'Moira', 1, '2024-07-01 00:00:00', NULL, 4, NULL),
+('SCnG9', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('tKIpb', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('Tx3Rg', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('vkm1Y', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('XMNY5', 10002, 'María', 1, '2024-07-03 00:00:00', NULL, 4, NULL),
+('YQKEI', 10004, 'Moira', 1, '2024-06-22 00:00:00', NULL, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,8 +254,8 @@ INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`,
 (8, '8pXKh', 4, 1, 4, 1, 15),
 (12, 'SBKgK', 1, 2, 1000, 1, 0),
 (13, 'SBKgK', 2, 2, 1000, 1, 0),
-(14, '0ZclL', 1, 2, 1000, 1, 0),
-(15, '0ZclL', 2, 2, 1000, 1, 0),
+(14, '0ZclL', 1, 2, 7, 4, 10),
+(15, '0ZclL', 2, 2, 11, 4, 20),
 (16, 'RdFi5', 1, 2, 1000, 1, 0),
 (17, 'RdFi5', 2, 2, 1000, 1, 0),
 (20, 'MNqIm', 1, 2, 1000, 1, 0),
@@ -347,6 +371,12 @@ INSERT INTO `usuarios_tipo` (`id`, `rol`) VALUES
 --
 
 --
+-- Indexes for table `encuestas`
+--
+ALTER TABLE `encuestas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `mesas`
 --
 ALTER TABLE `mesas`
@@ -409,6 +439,12 @@ ALTER TABLE `usuarios_tipo`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `encuestas`
+--
+ALTER TABLE `encuestas`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `mesas_estado`

@@ -312,7 +312,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:666/mesas/10001"
+				"url": "http://localhost:666/mesas/10003"
 			},
 			"response": []
 		},
@@ -429,7 +429,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:666/pedidos/GGL4S"
+				"url": "http://localhost:666/pedidos/8pXKh"
 			},
 			"response": []
 		},
@@ -712,7 +712,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 5,\r\n    \"usuario_preparacion\": 11,\r\n    \"estado_pedido\": 4,\r\n    \"tiempo_preparacion_prod\": 15\r\n}",
+					"raw": "{\r\n    \"id\": 15,\r\n    \"usuario_preparacion\": 11,\r\n    \"estado_pedido\": 4,\r\n    \"tiempo_preparacion_prod\": 20\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -736,14 +736,146 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"QtcK5\",\r\n    \"id_mesa\": 10003,\r\n    \"mesa_estado\": 2,\r\n    \"estado_pedido\": 4\r\n}",
+					"raw": "{\r\n    \"id\": \"8pXKh\",\r\n    \"id_mesa\": 10004,\r\n    \"mesa_estado\": 2,\r\n    \"estado_pedido\": 4\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:666/pedidos/estado"
+				"url": "http://localhost:666/pedidos/modificarEstado"
+			},
+			"response": []
+		},
+		{
+			"name": "34-Listar_ProductosEnPedidos-en-cola",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAxOTg5NTksImRhdGEiOnsidXN1YXJpbyI6Imdhc3Rvbl9zb2NpbyIsInJvbCI6MX0sImFwcCI6IlRQIENvbWFuZGEifQ.wvkrVR9efqmYU1U7IsrIqCpxhnKH_xqPWA9UXGK7_xA"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productosEnPedido/en-cola"
+			},
+			"response": []
+		},
+		{
+			"name": "35-Listar_ProductosEnPedidos-en-preparacion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAxOTg5NTksImRhdGEiOnsidXN1YXJpbyI6Imdhc3Rvbl9zb2NpbyIsInJvbCI6MX0sImFwcCI6IlRQIENvbWFuZGEifQ.wvkrVR9efqmYU1U7IsrIqCpxhnKH_xqPWA9UXGK7_xA"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productosEnPedido/en-preparacion"
+			},
+			"response": []
+		},
+		{
+			"name": "36-Listar_ProductosEnPedidos-listo-servir",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAxOTg5NTksImRhdGEiOnsidXN1YXJpbyI6Imdhc3Rvbl9zb2NpbyIsInJvbCI6MX0sImFwcCI6IlRQIENvbWFuZGEifQ.wvkrVR9efqmYU1U7IsrIqCpxhnKH_xqPWA9UXGK7_xA"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productosEnPedido/listo-servir"
+			},
+			"response": []
+		},
+		{
+			"name": "37-Listar_ProductosEnPedidos-entregado",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAxOTg5NTksImRhdGEiOnsidXN1YXJpbyI6Imdhc3Rvbl9zb2NpbyIsInJvbCI6MX0sImFwcCI6IlRQIENvbWFuZGEifQ.wvkrVR9efqmYU1U7IsrIqCpxhnKH_xqPWA9UXGK7_xA"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:666/productosEnPedido/entregado"
+			},
+			"response": []
+		},
+		{
+			"name": "38-Pedidos-Cerrar pedido",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAxOTg5NTksImRhdGEiOnsidXN1YXJpbyI6Imdhc3Rvbl9zb2NpbyIsInJvbCI6MX0sImFwcCI6IlRQIENvbWFuZGEifQ.wvkrVR9efqmYU1U7IsrIqCpxhnKH_xqPWA9UXGK7_xA"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idPedido\": \"8pXKh\",\r\n    \"id_mesa\": 10004,\r\n    \"estado_mesa\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:666/pedidos/cerrar"
+			},
+			"response": []
+		},
+		{
+			"name": "39-Cliente-estadoPedido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/pedidos/estadoPedido?id_mesa=10001&id_pedido=1YCGP",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"estadoPedido"
+					],
+					"query": [
+						{
+							"key": "id_mesa",
+							"value": "10001"
+						},
+						{
+							"key": "id_pedido",
+							"value": "1YCGP"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "40-Cliente-completarEncuesta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_mesa\": 10004,\r\n    \"id_pedido\": \"8pXKh\",\r\n    \"nota_restaurante\": 8,\r\n    \"nota_mesa\": 8,\r\n    \"nota_mozo\": 8,\r\n    \"nota_cocinero\": 8,\r\n    \"comentarios\" : \"Todo OK\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:666/encuestas"
 			},
 			"response": []
 		}

@@ -81,7 +81,7 @@ class Producto_en_Pedido
     public static function listarProductosPorSector($sector)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT productos_en_pedido.id, productos_en_pedido.id_pedido, productos.nombre as producto, sectores.descripcion as sector, productos_en_pedido.cantidad as cantidad, usuarios.nombre_usuario as usuario_preparacion, pedidos_estado.estado as estado_pedido, productos_en_pedido.tiempo_preparacion as tiempo_preparacion_prod FROM productos_en_pedido JOIN productos ON productos_en_pedido.id_producto = productos.id JOIN sectores ON productos.id_sector = sectores.id JOIN usuarios ON productos_en_pedido.id_usuario_preparacion = usuarios.id JOIN pedidos_estado ON productos_en_pedido.id_estado_pedido = pedidos_estado.id WHERE sectores.id = :sector");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT productos_en_pedido.id, productos_en_pedido.id_pedido, productos.nombre as producto, sectores.descripcion as sector, productos_en_pedido.cantidad as cantidad, usuarios.nombre_usuario as usuario_preparacion, pedidos_estado.estado as estado_pedido, productos_en_pedido.tiempo_preparacion as tiempo_preparacion_prod FROM productos_en_pedido JOIN productos ON productos_en_pedido.id_producto = productos.id JOIN sectores ON productos.id_sector = sectores.id JOIN usuarios ON productos_en_pedido.id_usuario_preparacion = usuarios.id JOIN pedidos_estado ON productos_en_pedido.id_estado_pedido = pedidos_estado.id WHERE sectores.id = :sector AND productos_en_pedido.id_estado_pedido <> 3 AND productos_en_pedido.id_estado_pedido <> 4");
         
         $consulta->bindValue(':sector', $sector, PDO::PARAM_INT);
         $consulta->execute();
@@ -100,5 +100,16 @@ class Producto_en_Pedido
         $consulta->bindValue(':tiempo_preparacion_prod', $tiempo_preparacion_prod, PDO::PARAM_INT);
         $consulta->bindValue(':id_producto_en_pedido', $idProductoEnPedido, PDO::PARAM_INT);
         $consulta->execute();
+    }
+
+    public static function listarProductosPorEstado($estado)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT productos_en_pedido.id, productos_en_pedido.id_pedido, productos.nombre as producto, sectores.descripcion as sector, productos_en_pedido.cantidad as cantidad, usuarios.nombre_usuario as usuario_preparacion, pedidos_estado.estado as estado_pedido, productos_en_pedido.tiempo_preparacion as tiempo_preparacion_prod FROM productos_en_pedido JOIN productos ON productos_en_pedido.id_producto = productos.id JOIN sectores ON productos.id_sector = sectores.id JOIN usuarios ON productos_en_pedido.id_usuario_preparacion = usuarios.id JOIN pedidos_estado ON productos_en_pedido.id_estado_pedido = pedidos_estado.id WHERE productos_en_pedido.id_estado_pedido = :estado");
+        
+        $consulta->bindValue(':estado', $estado, PDO::PARAM_INT);
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto_en_Pedido');
     }
 }
