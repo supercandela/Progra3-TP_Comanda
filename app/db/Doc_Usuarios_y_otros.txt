@@ -1,0 +1,77 @@
+TP_COMANDA:
+
+Usuarios:
+nombre_usuario: candela_usuario
+clave: 123456
+
+nombre_usuario: alejandro_usuario
+clave: 123456
+
+nombre_usuario: francisco_mozo
+clave: mozo123
+
+nombre_usuario: gaston_socio
+clave: socio1234
+
+nombre_usuario : bartender
+clave: bar123
+
+nombre_usuario: pastelero_gachi
+clave: candybar123
+
+nombre_usuario: cervecero_pachi
+clave: cervecero123
+
+nombre_usuario: cocinero_tano
+clave: cocina123
+
+
+-----------------
+
+Roles
+
+1 - Socio
+2 - Bartender
+3 - Cervecero
+4 - Cocinero
+5 - Mozo
+6 - Pastelero
+1000 - No asignado
+
+
+------------
+
+Sectores
+
+1 - cocina
+2 - candybar
+3 - cerveceria
+4 - barra
+
+
+-----------
+
+Mesas Estado
+
+1 - Esperando pedido
+2 - Cliente Comiendo
+3 - cliente Pagando
+4 - cerrada
+
+
+------------
+
+Pedidos / Productos Estados
+
+1 - en cola
+2 - en preparacion
+3 - listo para servir
+4 - entregado
+
+--------
+Usuarios Estados
+
+1 - contrato tiempo indeterminado
+2 - contrato temporal
+3 - inactivo
+4 - socio - Sin Contrato

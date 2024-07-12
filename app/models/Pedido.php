@@ -282,7 +282,7 @@ class Pedido
                     <h1>Sick Sad World</h1>
                 </div>
                 <div>
-                    <h4>Lista de Productos</h4>
+                    <h4>Detalle del pedido</h4>
                     <table>
                         <thead>
                             <tr>

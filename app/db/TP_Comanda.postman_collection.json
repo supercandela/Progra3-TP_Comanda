@@ -7,6 +7,10 @@
 	},
 	"item": [
 		{
+			"name": "Paso A Paso",
+			"item": []
+		},
+		{
 			"name": "02-Usuarios-CargarUno",
 			"request": {
 				"auth": {
@@ -901,6 +905,31 @@
 					]
 				},
 				"url": "http://localhost:666/pedidos/descargarCuentaEnPDF"
+			},
+			"response": []
+		},
+		{
+			"name": "41-Productos-DescargarCSV",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjA4MDU5NjcsImRhdGEiOnsidXN1YXJpbyI6Imdhc3Rvbl9zb2NpbyIsInJvbCI6MX0sImFwcCI6IlRQIENvbWFuZGEifQ.OCpaANl5vZAICDqbc1hESusqxTCmBM4Oi3Dcd19jPaE"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:666/productos/descargarCSV"
 			},
 			"response": []
 		}

@@ -100,4 +100,33 @@ class ProductoController extends Producto implements IApiUsable
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    public function DescargarProductosACSV ($request, $response, $args)
+    {
+        $lista = Producto::obtenerTodos();
+
+        // Crea un archivo temporal para el CSV
+        $archivoTemp = tmpfile();
+        $metaData = stream_get_meta_data($archivoTemp);
+        $filePath = $metaData['uri'];
+
+        // Escribe los datos en el archivo temporal
+        foreach ($lista as $linea) {
+            fputcsv($archivoTemp, (array) $linea);
+        }
+
+        // Coloca el cursor al principio del archivo
+        rewind($archivoTemp);
+
+        // Establece las cabeceras para la descarga
+        $response = $response->withHeader('Content-Type', 'aplication/csv')->withHeader('Content-Disposition', 'attachment; filename="productos.csv"');
+
+        // Lee el contenido del archivo y escribe en el cuerpo de la respuesta
+        $response->getBody()->write(stream_get_contents($archivoTemp));
+
+        // Cierra el archivo temporal
+        fclose($archivoTemp);
+
+        return $response;
+    }
 }

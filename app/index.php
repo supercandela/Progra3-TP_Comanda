@@ -58,6 +58,7 @@ $app->group('/productos', function (RouteCollectorProxy $group) {
   $group->put('[/]', \ProductoController::class . ':ModificarUno');
   $group->delete('[/]', \ProductoController::class . ':BorrarUno');
   $group->post('/cargarCSV', \ProductoController::class . ':CargarProductosDesdeCSV');
+  $group->post('/descargarCSV', \ProductoController::class . ':DescargarProductosACSV');
 });
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
