@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2024 at 10:33 PM
+-- Generation Time: Jul 12, 2024 at 08:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,8 @@ CREATE TABLE `encuestas` (
 --
 
 INSERT INTO `encuestas` (`id`, `id_mesa`, `id_pedido`, `nota_restaurante`, `nota_mesa`, `nota_mozo`, `nota_cocinero`, `comentarios`) VALUES
-(1, 10004, '8pXKh', 8, 8, 8, 8, 'Todo OK');
+(1, 10004, '8pXKh', 8, 8, 8, 8, 'Todo OK'),
+(2, 10001, 'SCnG9', 0, 0, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,7 @@ CREATE TABLE `mesas` (
 
 INSERT INTO `mesas` (`id`, `id_estado`) VALUES
 (10000, 4),
-(10001, 2),
+(10001, 4),
 (10002, 1),
 (10003, 2),
 (10004, 2),
@@ -136,6 +137,7 @@ INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `i
 ('LUL08', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
 ('MNqIm', 10002, 'María', 1, '2024-07-03 00:00:00', NULL, 4, NULL),
 ('N3zzK', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('O4VW5', 10002, 'Belén', 1, '2024-07-06 03:00:33', NULL, 4, NULL),
 ('ov9gU', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
 ('pIZZH', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
 ('QtcK5', 10003, 'Candela', 4, '2024-06-22 00:00:00', '2024-07-04 00:00:00', 5, NULL),
@@ -143,7 +145,7 @@ INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `i
 ('RdFi5', 10003, 'Moira', 1, '2024-07-01 00:00:00', NULL, 4, NULL),
 ('S2N9I', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
 ('SBKgK', 10003, 'Moira', 1, '2024-07-01 00:00:00', NULL, 4, NULL),
-('SCnG9', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
+('SCnG9', 10001, 'Diego', 4, '2024-06-21 00:00:00', '2024-07-06 03:06:48', 5, 34000),
 ('tKIpb', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
 ('Tx3Rg', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
 ('vkm1Y', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
@@ -246,7 +248,7 @@ CREATE TABLE `productos_en_pedido` (
 --
 
 INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`, `id_usuario_preparacion`, `id_estado_pedido`, `tiempo_preparacion`) VALUES
-(1, 'SCnG9', 2, 4, 4, 2, 0),
+(1, 'SCnG9', 2, 4, 11, 3, 20),
 (4, 'QtcK5', 1, 2, 11, 4, 15),
 (5, 'QtcK5', 2, 2, 11, 4, 15),
 (6, '8pXKh', 1, 3, 4, 2, 15),
@@ -265,7 +267,11 @@ INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`,
 (24, 'GGL4S', 8, 2, 1000, 1, 0),
 (25, 'GGL4S', 10, 1, 1000, 1, 0),
 (26, 'GGL4S', 11, 2, 1000, 1, 0),
-(27, 'GGL4S', 9, 1, 1000, 1, 0);
+(27, 'GGL4S', 9, 1, 1000, 1, 0),
+(28, 'O4VW5', 8, 2, 1000, 1, 0),
+(29, 'O4VW5', 10, 1, 1000, 1, 0),
+(30, 'O4VW5', 11, 2, 1000, 1, 0),
+(31, 'O4VW5', 9, 1, 1000, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -444,7 +450,7 @@ ALTER TABLE `usuarios_tipo`
 -- AUTO_INCREMENT for table `encuestas`
 --
 ALTER TABLE `encuestas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `mesas_estado`
@@ -468,7 +474,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `productos_en_pedido`
 --
 ALTER TABLE `productos_en_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `sectores`

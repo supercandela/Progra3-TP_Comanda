@@ -24,11 +24,10 @@ class PedidoController extends Pedido implements IApiUsable
         if ((strpos($tipo_archivo, "png") || strpos($tipo_archivo, "jpeg")) && ($tamano_archivo < 300000)) {
 
             $extension = substr($tipo_archivo, strpos($tipo_archivo, '/') + 1);
-
         } else {
             $payload = json_encode(array("mensaje" => "La imagen no tiene un formato o tamaño que sean admitidos."));
             $response->getBody()->write($payload);
-            return $response->withHeader('Content-Type', 'application/json');  
+            return $response->withHeader('Content-Type', 'application/json');
         }
 
         $pedido = new Pedido();
@@ -138,7 +137,7 @@ class PedidoController extends Pedido implements IApiUsable
      * Calcula precio final del pedido
      * Habilita la encuesta
      */
-    public function CerrarPedido ($request, $response, $args)
+    public function CerrarPedido($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
         $pedidoId = $parametros['idPedido'];
@@ -155,7 +154,7 @@ class PedidoController extends Pedido implements IApiUsable
         return $response->withHeader('Content-Type', 'application/json');
     }
 
-    public function ChequearEstadoPedido ($request, $response, $args)
+    public function ChequearEstadoPedido($request, $response, $args)
     {
 
         $parametros = $request->getQueryParams();
@@ -165,5 +164,16 @@ class PedidoController extends Pedido implements IApiUsable
 
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    public function descargarCuentaEnPDF($request, $response, $args)
+    {
+        $parametros = $request->getParsedBody();
+
+        $id_pedido = $parametros['id_pedido'];
+
+        $response->getBody()->write(Pedido::DescargarCuenta($id_pedido));
+        $response = $response->withHeader('Content-Type', 'application/pdf')->withHeader('Content-Disposition', 'attachment; filename="cuenta.pdf"');
+        return $response;
     }
 }

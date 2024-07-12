@@ -89,7 +89,9 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->put('/cerrar', \PedidoController::class . ':CerrarPedido')
     ->add(new RolesMiddleware([1])) //Roles: 1 - Socio
     ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
-
+  $group->post('/descargarCuentaEnPDF', \PedidoController::class . ':descargarCuentaEnPDF')
+    ->add(new RolesMiddleware([1])) //Roles: 1 - Socio
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
 });
 
 $app->group('/productosEnPedido', function (RouteCollectorProxy $group) {
