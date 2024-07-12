@@ -54,4 +54,12 @@ class Mesa
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
     }
+
+    public static function obtenerMesaMasUsada ()
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id_mesa, COUNT(*) as num_pedidos FROM pedidos GROUP BY id_mesa ORDER BY num_pedidos DESC LIMIT 1;");
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_NAMED);
+    }
 }

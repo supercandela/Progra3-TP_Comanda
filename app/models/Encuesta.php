@@ -38,4 +38,15 @@ class Encuesta
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
         $consulta->execute();
     }
+
+    public static function obtenerTodos()
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM encuestas");
+        $consulta->execute();
+
+        $data = $consulta->fetchAll(PDO::FETCH_CLASS, 'Encuesta');
+
+        return $data;
+    }
 }

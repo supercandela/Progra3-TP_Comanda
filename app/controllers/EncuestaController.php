@@ -31,5 +31,14 @@ class EncuestaController extends Encuesta
         return $response->withHeader('Content-Type', 'application/json');
     }
 
+    public function TraerTodos($request, $response, $args)
+    {
+        $lista = Encuesta::obtenerTodos();
+        $payload = json_encode(array("Encuestas" => $lista));
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
 
 }

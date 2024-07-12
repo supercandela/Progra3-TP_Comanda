@@ -246,7 +246,8 @@ class Pedido
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
 
-        $consulta = $objAccesoDato->prepararConsulta("SELECT pedidos.id, pedidos.id_mesa, pedidos_estado.estado FROM pedidos JOIN pedidos_estado ON pedidos.id_estado_pedido = pedidos_estado.id WHERE pedidos.id = :pedido AND pedidos.id_mesa = :mesa");
+        $consulta = $objAccesoDato->prepararConsulta("SELECT pedidos.id, pedidos.id_mesa, pedidos_estado.estado, MAX(productos_en_pedido.tiempo_preparacion) AS tiempo_espera FROM pedidos JOIN pedidos_estado ON pedidos.id_estado_pedido = pedidos_estado.id JOIN productos_en_pedido ON pedidos.id = productos_en_pedido.id_pedido WHERE pedidos.id = :pedido AND pedidos.id_mesa = :mesa GROUP BY pedidos.id, pedidos.id_mesa, pedidos_estado.estado;");
+
         $consulta->bindValue(':pedido', $pedido, PDO::PARAM_STR);
         $consulta->bindValue(':mesa', $mesa, PDO::PARAM_INT);
         $consulta->execute();

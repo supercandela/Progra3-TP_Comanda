@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2024 at 08:15 PM
+-- Generation Time: Jul 12, 2024 at 10:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,8 @@ CREATE TABLE `encuestas` (
 
 INSERT INTO `encuestas` (`id`, `id_mesa`, `id_pedido`, `nota_restaurante`, `nota_mesa`, `nota_mozo`, `nota_cocinero`, `comentarios`) VALUES
 (1, 10004, '8pXKh', 8, 8, 8, 8, 'Todo OK'),
-(2, 10001, 'SCnG9', 0, 0, 0, 0, '');
+(2, 10001, 'SCnG9', 0, 0, 0, 0, ''),
+(3, 10006, 'YPYHB', 7, 5, 9, 9, 'La comida estuvo rica.');
 
 -- --------------------------------------------------------
 
@@ -150,6 +151,7 @@ INSERT INTO `pedidos` (`id`, `id_mesa`, `cliente_nombre`, `id_estado_pedido`, `i
 ('Tx3Rg', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
 ('vkm1Y', 10001, 'Diego', 1, '2024-06-21 00:00:00', NULL, 5, NULL),
 ('XMNY5', 10002, 'María', 1, '2024-07-03 00:00:00', NULL, 4, NULL),
+('YPYHB', 10006, 'Esteban', 4, '2024-07-12 21:13:30', '2024-07-12 21:56:23', 4, 34500),
 ('YQKEI', 10004, 'Moira', 1, '2024-06-22 00:00:00', NULL, 5, NULL);
 
 -- --------------------------------------------------------
@@ -225,7 +227,10 @@ INSERT INTO `productos` (`id`, `id_sector`, `nombre`, `descripcion`, `precio`, `
 (31, 3, 'Cerveza Roja', 'Cerveza roja con un sabor maltoso.', 7000, 5),
 (32, 4, 'Whisky Sour', 'Cóctel de whisky con jugo de limón y azúcar.', 8500, 5),
 (33, 1, 'Alitas de Pollo', 'Alitas de pollo picantes servidas con salsa ranch.', 7000, 20),
-(34, 2, 'Mousse de Chocolate', 'Postre cremoso de mousse de chocolate.', 5500, 8);
+(34, 2, 'Mousse de Chocolate', 'Postre cremoso de mousse de chocolate.', 5500, 8),
+(35, 1, 'Milanesa a caballo', 'Milanesa de carne de ternera con huevos fritos, acompañada de papas fritas.', 8000, 25),
+(36, 1, 'Hamburguesa de garbanzo', 'Medallón de garbanzos, chía, cebolla, morrón, en pan de papa, con tomate, queso, lechuga y huevo. Acompañado de papas fritas.', 7500, 20),
+(37, 3, 'Corona - 475ml.', 'Cerveza Corona servida en pinta. 475 ml. Puede acompañarse con limón.', 3500, 5);
 
 -- --------------------------------------------------------
 
@@ -271,7 +276,11 @@ INSERT INTO `productos_en_pedido` (`id`, `id_pedido`, `id_producto`, `cantidad`,
 (28, 'O4VW5', 8, 2, 1000, 1, 0),
 (29, 'O4VW5', 10, 1, 1000, 1, 0),
 (30, 'O4VW5', 11, 2, 1000, 1, 0),
-(31, 'O4VW5', 9, 1, 1000, 1, 0);
+(31, 'O4VW5', 9, 1, 1000, 1, 0),
+(32, 'YPYHB', 35, 1, 11, 4, 40),
+(33, 'YPYHB', 36, 2, 11, 3, 40),
+(34, 'YPYHB', 37, 1, 10, 4, 5),
+(35, 'YPYHB', 16, 1, 7, 4, 10);
 
 -- --------------------------------------------------------
 
@@ -450,7 +459,7 @@ ALTER TABLE `usuarios_tipo`
 -- AUTO_INCREMENT for table `encuestas`
 --
 ALTER TABLE `encuestas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mesas_estado`
@@ -468,13 +477,13 @@ ALTER TABLE `pedidos_estado`
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `productos_en_pedido`
 --
 ALTER TABLE `productos_en_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `sectores`

@@ -62,6 +62,9 @@ $app->group('/productos', function (RouteCollectorProxy $group) {
 });
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
+  $group->get('/masUsada', \MesaController::class . ':TraerMasUsada')
+    ->add(new RolesMiddleware([1])) //Roles: 1 - Socio
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
   $group->get('[/]', \MesaController::class . ':TraerTodos')
     ->add(new RolesMiddleware([1, 5])) //Roles: 1 - Socio / 5 - Mozo
     ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
@@ -128,6 +131,9 @@ $app->group('/productosEnPedido', function (RouteCollectorProxy $group) {
 
 $app->group('/encuestas', function (RouteCollectorProxy $group) {
   $group->put('[/]', \EncuestaController::class . ':ModificarUno');
+  $group->get('[/]', \EncuestaController::class . ':TraerTodos')
+    ->add(new RolesMiddleware([1])) //Roles: 1 - Socio 
+    ->add(\ParametrosMiddleware::class . ':bearerTokenMW');
 });
 
 $app->group('/auth', function (RouteCollectorProxy $group) {
